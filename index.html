@@ -1947,6 +1947,40 @@ function closeCoach(){
   stopMouthAnim(canvas);
   document.getElementById('coach-modal').classList.remove('vis');
 }
+
+// ════════════ INIT ════════════
+document.addEventListener('DOMContentLoaded', function(){
+  buildSessions();
+  lN();
+  gT('pusha');
+
+  // Ocultar splash después de 1.4s
+  setTimeout(function(){
+    var splash = document.getElementById('splash');
+    if(splash){
+      splash.classList.add('out');
+      setTimeout(function(){ splash.style.display='none'; }, 600);
+    }
+  }, 1400);
+
+  // Service Worker
+  if('serviceWorker' in navigator){
+    navigator.serviceWorker.register('sw.js').catch(function(){});
+  }
+
+  // Polyfill roundRect para Safari
+  if(!CanvasRenderingContext2D.prototype.roundRect){
+    CanvasRenderingContext2D.prototype.roundRect = function(x,y,w,h,r){
+      this.beginPath();
+      this.moveTo(x+r,y);this.lineTo(x+w-r,y);this.quadraticCurveTo(x+w,y,x+w,y+r);
+      this.lineTo(x+w,y+h-r);this.quadraticCurveTo(x+w,y+h,x+w-r,y+h);
+      this.lineTo(x+r,y+h);this.quadraticCurveTo(x,y+h,x,y+h-r);
+      this.lineTo(x,y+r);this.quadraticCurveTo(x,y,x+r,y);
+      this.closePath();return this;
+    };
+  }
+});
+
 </script>
 
 <!-- COACH MODAL -->
