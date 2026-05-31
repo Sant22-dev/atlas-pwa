@@ -251,7 +251,16 @@ button{cursor:pointer}
 .f-input{width:100%;background:var(--bg4);border:1px solid var(--bd);border-radius:10px;padding:10px 14px 10px 36px;color:var(--tx);font-size:14px;transition:border-color .15s;outline:none}
 .f-input:focus{border-color:var(--bd3)}
 .f-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--tx3);font-size:14px;pointer-events:none}
-.f-results{position:relative;margin-top:4px;left:0;right:0;background:var(--bg4);border:1px solid var(--bd2);border-radius:12px;z-index:10;max-height:260px;overflow-y:auto;display:none}
+.f-results{
+  display:none;
+  margin-top:4px;
+  border-radius:12px;
+  background:var(--bg3);
+  border:1px solid var(--bd2);
+  overflow-y:auto;
+  max-height:280px;
+  -webkit-overflow-scrolling:touch;
+}
 .f-results.vis{display:block}
 .fr-item{padding:13px 14px;cursor:pointer;border-bottom:1px solid var(--bd);transition:background .15s;user-select:none;-webkit-user-select:none}
 .fr-item:last-child{border-bottom:none}
@@ -1093,6 +1102,25 @@ canvas.ch{display:block;width:100%!important}
 /* ── MEAL BODY: overflow visible para el dropdown ── */
 .meal-body{padding:0 16px 16px;overflow:visible!important}
 .meal.open .meal-body{display:block}
+
+/* meal divider */
+.meal-divider{height:1px;background:var(--bd);margin:10px 0}
+/* free details */
+.free-details{margin-top:6px}
+.free-summary{
+  font-size:12px;font-weight:600;letter-spacing:1px;
+  color:var(--tx3);cursor:pointer;padding:6px 2px;
+  list-style:none;display:flex;align-items:center;gap:6px;
+}
+.free-summary::-webkit-details-marker{display:none}
+.free-details[open] .free-summary{color:var(--tx2)}
+.free-details .free-row{margin-top:8px}
+.free-details .free-add{margin-top:8px}
+/* meal-body overflow visible para que nada corte el contenido */
+.meal-body{padding:0 16px 16px;overflow:visible!important;display:none}
+.meal.open .meal-body{display:block}
+/* f-search sin margin top excesivo */
+.f-search{margin-bottom:0;margin-top:0}
 </style>
 </head>
 <body>
@@ -1881,39 +1909,32 @@ function rNutri(){
     h.push('<span class="meal-arr">\u25be</span>');
     h.push('</div>');
 
-    // Body del meal
+    // Body del meal — buscador ARRIBA para que dropdown caiga hacia abajo
     h.push('<div class="meal-body">');
-
-    // Items del día
-    h.push('<div id="fitems-'+mid+'">'+renderItems(mid)+'</div>');
-
-    // Buscador simple
     h.push('<div class="f-search">');
-    h.push('<input class="f-input f-search-input" id="fsrch-'+mid+'" data-mid="'+mid+'" placeholder="Buscar alimento... (ej: pollo, arroz, huevo)" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">');
+    h.push('<input class="f-input f-search-input" id="fsrch-'+mid+'" data-mid="'+mid+'" placeholder="Buscar alimento..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">');
     h.push('</div>');
-    // Resultados de búsqueda
     h.push('<div class="f-results" id="fres-'+mid+'" style="display:none"></div>');
-    // Chip del alimento seleccionado
     h.push('<div class="f-selected-chip" id="fchip-'+mid+'" style="display:none"></div>');
-    // Fila cantidad + botón agregar
     h.push('<div class="qty-row" id="fqty-'+mid+'" style="display:none">');
     h.push('<div class="qty-field">');
-    h.push('<input class="qty-in" id="fqtyv-'+mid+'" type="number" inputmode="decimal" placeholder="Cantidad" autocomplete="off" step="1">');
+    h.push('<input class="qty-in" id="fqtyv-'+mid+'" type="number" inputmode="decimal" placeholder="Cantidad" autocomplete="off">');
     h.push('<span class="qty-unit-lbl" id="fqtylbl-'+mid+'">g</span>');
     h.push('</div>');
     h.push('<button class="qty-add" data-action="add" data-mid="'+mid+'">AGREGAR</button>');
     h.push('</div>');
-    // Entrada libre separada
-    h.push('<div class="free-sep">Entrada libre</div>');
+    h.push('<div class="meal-divider"></div>');
+    h.push('<div id="fitems-'+mid+'">'+renderItems(mid)+'</div>');
+    h.push('<details class="free-details"><summary class="free-summary">+ Entrada libre (sin buscar)</summary>');
     h.push('<div class="free-row">');
     h.push('<input class="free-in" id="fn-'+mid+'" placeholder="Alimento">');
     h.push('<input class="free-in sm" id="fk-'+mid+'" type="number" inputmode="decimal" placeholder="Kcal">');
     h.push('<input class="free-in sm" id="fp-'+mid+'" type="number" inputmode="decimal" placeholder="Prot">');
     h.push('<input class="free-in sm" id="fc-'+mid+'" type="number" inputmode="decimal" placeholder="Carbs">');
     h.push('</div>');
-    h.push('<button class="free-add" data-action="free" data-mid="'+mid+'">+ Agregar entrada libre</button>');
-
-    h.push('</div></div>');
+    h.push('<button class="free-add" data-action="free" data-mid="'+mid+'">+ Agregar</button>');
+    h.push('</details>');
+    h.push('</div></div>');;
   });
 
   // Sección mis alimentos
@@ -3357,15 +3378,21 @@ function renderMyFoodsList(){
 document.addEventListener('DOMContentLoaded', function(){
   // ── Event delegation: un listener para TODOS los clicks de nutrición ──
   document.addEventListener('click', function(e){
+    // Primero chequear fr-item (ANTES del return por data-action)
+    var frItem=e.target.closest('.fr-item');
+    if(frItem&&frItem.dataset.fid&&frItem.dataset.mid){
+      e.stopPropagation();
+      fSel(frItem.dataset.mid,frItem.dataset.fid);
+      return;
+    }
+    // Luego manejar data-action
     var t=e.target;
-    // Subir al padre si tocamos un hijo del elemento con data-action
     while(t&&t!==document.body&&!t.dataset.action)t=t.parentElement;
     if(!t||!t.dataset.action)return;
     var action=t.dataset.action;
     var mid=t.dataset.mid||'';
     var fid=t.dataset.fid||'';
     var rid=t.dataset.rid||'';
-
     if(action==='del'){fDel(mid,rid);}
     else if(action==='add'){fAdd(mid);}
     else if(action==='free'){fFree(mid);}
@@ -3374,11 +3401,6 @@ document.addEventListener('DOMContentLoaded', function(){
     else if(action==='mfc-del'){deleteCustomFood(fid);}
     else if(action==='create'){openFoodModal(mid||null);}
     else if(action==='clear-sel'){resetFoodSearch(mid);}
-    // fr-item: seleccionar alimento del buscador
-    var frItem=e.target.closest('.fr-item');
-    if(frItem&&frItem.dataset.fid&&frItem.dataset.mid){
-      fSel(frItem.dataset.mid,frItem.dataset.fid);
-    }
   });
   // ── Input delegation para el buscador (también por keyup para iOS) ──
   function _handleSearch(e){
