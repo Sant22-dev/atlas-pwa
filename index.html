@@ -959,6 +959,140 @@ canvas.ch{display:block;width:100%!important}
 /* Meal body sin overflow hidden */
 .meal.open .meal-body{display:block}
 .meal-body{padding:0 16px 16px;overflow:visible}
+
+/* ── FR-ITEM MEJORADO ── */
+.fr-item{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:13px 14px;cursor:pointer;
+  border-bottom:1px solid var(--bd);
+  transition:background .1s;
+  -webkit-tap-highlight-color:rgba(0,0,0,0);
+  min-height:52px;
+}
+.fr-item:last-of-type{border-bottom:none}
+.fr-item:active{background:var(--bg5)!important}
+.fr-item-info{display:flex;flex-direction:column;gap:3px;flex:1;min-width:0}
+.fr-name{font-size:14px;font-weight:500;color:var(--tx);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fr-mac{font-family:var(--font-mono);font-size:11px;color:var(--tx3)}
+.fr-plus{font-size:22px;color:var(--gold);font-weight:300;
+  flex-shrink:0;margin-left:12px;line-height:1}
+/* f-results */
+.f-results{
+  border-radius:12px;background:var(--bg3);
+  border:1px solid var(--bd2);overflow:hidden;
+  margin-top:6px;display:none;
+  box-shadow:0 4px 20px rgba(0,0,0,.4);
+}
+/* f-search sin position relative */
+.f-search{margin-bottom:0;margin-top:12px}
+.f-input{
+  width:100%;background:var(--bg4);
+  border:1.5px solid var(--bd2);border-radius:12px;
+  padding:12px 16px;color:var(--tx);font-size:15px;
+  outline:none;transition:border-color .15s;
+  min-height:48px;-webkit-appearance:none;
+  display:block;
+}
+.f-input:focus{border-color:var(--gold);
+  box-shadow:0 0 0 3px rgba(242,201,76,.08)}
+.f-input::placeholder{color:var(--tx3)}
+
+/* ── QTY-ROW CON LABEL DE UNIDAD ── */
+.qty-row{display:none;gap:8px;margin-top:10px;align-items:stretch}
+.qty-field{position:relative;flex:1;display:flex;align-items:center}
+.qty-in{width:100%;background:var(--bg4);border:1.5px solid var(--bd2);
+  border-radius:10px;padding:12px 60px 12px 14px;color:var(--tx);
+  font-size:16px;font-weight:600;outline:none;min-height:48px;
+  -webkit-appearance:none;transition:border-color .15s;font-family:var(--font-mono)}
+.qty-in:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(242,201,76,.1)}
+.qty-unit-lbl{position:absolute;right:12px;top:50%;transform:translateY(-50%);
+  font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--tx3);pointer-events:none;background:var(--bg4);
+  padding:2px 4px;border-radius:4px}
+.qty-add{padding:12px 20px;border-radius:10px;border:none;
+  background:var(--gold);color:#111318;
+  font-family:'Bebas Neue',sans-serif;font-size:17px;
+  letter-spacing:2px;cursor:pointer;min-height:48px;
+  transition:all .15s;flex-shrink:0;white-space:nowrap}
+.qty-add:active{opacity:.85;transform:scale(.97)}
+
+/* ── F-RESULTS: SIEMPRE DEBAJO, NUNCA FLOTANTE ── */
+.f-results{
+  display:none;
+  margin-top:6px;
+  border-radius:12px;
+  background:var(--bg3);
+  border:1px solid var(--bd2);
+  overflow:hidden;
+  max-height:300px;
+  overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
+  /* SIN position:absolute — fluye con el documento */
+}
+.f-results > div{padding:4px 0}
+
+/* ── F-INPUT MEJORADO ── */
+.f-input{
+  width:100%;
+  background:var(--bg4);
+  border:1.5px solid var(--bd2);
+  border-radius:12px;
+  padding:13px 16px;
+  color:var(--tx);
+  font-size:15px;
+  outline:none;
+  min-height:50px;
+  -webkit-appearance:none;
+  display:block;
+  transition:border-color .15s;
+}
+.f-input:focus{
+  border-color:var(--gold);
+  box-shadow:0 0 0 3px rgba(242,201,76,.1);
+}
+.f-input::placeholder{color:var(--tx3)}
+
+/* ── FR-ITEM MEJORADO ── */
+.fr-item{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:13px 16px;cursor:pointer;
+  border-bottom:1px solid var(--bd);
+  transition:background .1s;
+  min-height:54px;
+  -webkit-tap-highlight-color:transparent;
+  user-select:none;
+}
+.fr-item:last-of-type{border-bottom:none}
+.fr-item:active,.fr-item:hover{background:var(--bg4)}
+.fr-item-info{display:flex;flex-direction:column;gap:3px;flex:1;min-width:0}
+.fr-name{font-size:14px;font-weight:600;color:var(--tx);
+  line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fr-mac{font-family:var(--font-mono);font-size:11px;color:var(--tx3);line-height:1.4}
+.fr-plus{font-size:24px;font-weight:300;color:var(--gold);
+  flex-shrink:0;margin-left:10px;line-height:1}
+
+/* ── CHIP DEL ALIMENTO SELECCIONADO ── */
+.f-selected-chip{
+  display:none;
+  align-items:center;justify-content:space-between;
+  gap:10px;margin-top:8px;padding:11px 14px;
+  border-radius:11px;
+  background:rgba(0,212,160,.07);
+  border:1px solid rgba(0,212,160,.2);
+}
+.f-sel-name{font-size:14px;font-weight:600;color:var(--pull);
+  flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.f-sel-macros{font-family:var(--font-mono);font-size:11px;color:var(--tx3);flex-shrink:0}
+.f-sel-clear{width:24px;height:24px;border-radius:50%;border:1px solid rgba(0,212,160,.3);
+  background:transparent;color:rgba(0,212,160,.6);cursor:pointer;font-size:12px;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  transition:all .15s}
+.f-sel-clear:active{background:rgba(0,212,160,.15)}
+
+/* ── MEAL BODY: overflow visible para el dropdown ── */
+.meal-body{padding:0 16px 16px;overflow:visible!important}
+.meal.open .meal-body{display:block}
 </style>
 </head>
 <body>
@@ -1148,122 +1282,135 @@ lb7:['Plancha elevación pierna','10 reps por lado. Descanso: 60 seg',[['10c/l',
 var ABS={pulla:'Crunch cable: 3×15/12/12 · Elevación piernas colgado: 3×12/10/10',pushb:'Oblicuos en polea: 3×15 c/lado · Plancha lateral: 3×30 seg c/lado',legsb:'Rueda abdominal: 4×15/15/12/12 · Plancha elevación pierna: 3×10 c/lado'};
 var MC=[{id:'des',n:'Desayuno',i:'☀',t:'7:30'},{id:'med',n:'Media mañana',i:'🍌',t:'10:30'},{id:'alm',n:'Almuerzo',i:'🍽',t:'13:00'},{id:'mer',n:'Merienda',i:'☕',t:'16:30'},{id:'pos',n:'Post-entreno',i:'💪',t:'Post'},{id:'cen',n:'Cena',i:'🌙',t:'21:00'},{id:'ext',n:'Extra',i:'+',t:''}];
 var FOODS=[
-{id:'pa01',n:'Pechuga de pollo asada',p:'100g',k:175,pr:26.4,c:0.1,f:7.7},
-{id:'pa02',n:'Pata/muslo pollo sin piel',p:'100g',k:172,pr:27.7,c:0,f:6.8},
-{id:'pa03',n:'Pollo con piel',p:'100g',k:298,pr:25.7,c:0,f:20.8},
-{id:'pa04',n:'Pavo',p:'100g',k:107,pr:21.9,c:0,f:2.2},
-{id:'pa05',n:'Huevo entero',p:'1 unidad (60g)',k:86,pr:7.5,c:0.4,f:5.7},
-{id:'pa06',n:'Clara de huevo',p:'1 clara (35g)',k:18,pr:3.8,c:0.3,f:0.1},
-{id:'pa07',n:'Yema de huevo',p:'1 yema (20g)',k:64,pr:3.2,c:0.7,f:5.3},
-{id:'pa08',n:'Carne vaca magra',p:'100g',k:123,pr:20,c:0,f:5},
-{id:'pa09',n:'Carne vaca filete',p:'100g',k:197,pr:19,c:0,f:14},
-{id:'pa10',n:'Carne vaca solomillo',p:'100g',k:272,pr:17,c:0,f:23},
-{id:'pa11',n:'Carne ternera magra',p:'100g',k:109,pr:21,c:0,f:3},
-{id:'pa12',n:'Carne cerdo magra',p:'100g',k:147,pr:21,c:0,f:7},
-{id:'pa13',n:'Cerdo solomillo',p:'100g',k:142,pr:27.2,c:0,f:2.8},
-{id:'pa14',n:'Carne cordero magra',p:'100g',k:122,pr:20,c:0,f:3},
-{id:'pa15',n:'Carne conejo',p:'100g',k:124,pr:22,c:0,f:4},
-{id:'pa16',n:'Carne caballo',p:'100g',k:113,pr:21,c:0,f:3},
-{id:'pe01',n:'Salmón crudo',p:'100g',k:127,pr:20.5,c:0,f:4.4},
-{id:'pe02',n:'Salmón al vapor',p:'100g',k:160,pr:25.8,c:0,f:5.5},
-{id:'pe03',n:'Salmón ahumado',p:'100g',k:117,pr:18.3,c:0,f:4.3},
-{id:'pe04',n:'Atún fresco crudo',p:'100g',k:109,pr:24.4,c:0,f:0.5},
-{id:'pe05',n:'Atún enlatado con aceite',p:'100g',k:198,pr:29.1,c:0,f:8.2},
-{id:'pe06',n:'Bacalao fresco',p:'100g',k:76,pr:17,c:0,f:1},
-{id:'pe07',n:'Merluza',p:'100g',k:89,pr:15.9,c:0,f:2.8},
-{id:'pe08',n:'Lubina al vapor',p:'100g',k:122,pr:23.2,c:0,f:2.5},
-{id:'pe09',n:'Dorada',p:'100g',k:140,pr:20.8,c:0,f:6.3},
-{id:'pe10',n:'Trucha',p:'100g',k:89,pr:16,c:0,f:3},
-{id:'pe11',n:'Caballa cruda',p:'100g',k:189,pr:19.1,c:0,f:11.9},
-{id:'pe12',n:'Sardinas cocidas',p:'100g',k:208,pr:24.6,c:0,f:11.5},
-{id:'pe13',n:'Anchoa enlatada',p:'100g',k:210,pr:28.9,c:0,f:9.7},
-{id:'pe14',n:'Gambas cocidas',p:'100g',k:96,pr:19.8,c:0,f:1.7},
-{id:'pe15',n:'Camarones al vapor',p:'100g',k:91,pr:17.4,c:1.2,f:1.3},
-{id:'pe16',n:'Mejillones al vapor',p:'100g',k:171,pr:23.7,c:7.4,f:4.5},
-{id:'ld01',n:'Leche entera',p:'250ml',k:153,pr:7.9,c:12,f:8.1},
-{id:'ld02',n:'Leche desnatada',p:'250ml',k:85,pr:8.4,c:12.4,f:0.2},
-{id:'ld03',n:'Leche semidesnatada',p:'250ml',k:125,pr:8.3,c:12,f:5},
-{id:'ld04',n:'Yogur natural entero',p:'125g',k:76,pr:4.3,c:5.8,f:4.1},
-{id:'ld05',n:'Yogur griego natural',p:'100g',k:97,pr:9,c:4,f:5},
-{id:'ld06',n:'Yogur desnatado natural',p:'125g',k:70,pr:7.2,c:9.6,f:0.2},
-{id:'ld07',n:'Yogur griego con fruta',p:'100g',k:106,pr:7.3,c:12.3,f:3},
-{id:'ld08',n:'Queso fresco Burgos',p:'100g',k:167,pr:11,c:4,f:11},
-{id:'ld09',n:'Requesón / Ricota',p:'100g',k:156,pr:11.3,c:4.1,f:10.4},
-{id:'ld10',n:'Queso cheddar',p:'100g',k:404,pr:22.9,c:3.1,f:33.3},
-{id:'ld11',n:'Queso mozzarella',p:'100g',k:300,pr:22.2,c:2.2,f:22.4},
-{id:'ld12',n:'Queso feta',p:'100g',k:264,pr:14.2,c:4.1,f:21.3},
-{id:'ld13',n:'Queso parmesano rallado',p:'30g',k:126,pr:8.5,c:4.2,f:8.4},
-{id:'ld14',n:'Queso manchego curado',p:'100g',k:420,pr:32,c:1,f:32},
-{id:'ld15',n:'Queso crema',p:'30g',k:105,pr:1.8,c:1.7,f:10.3},
-{id:'ld16',n:'Leche de soja',p:'250ml',k:108,pr:6.5,c:12.3,f:3.7},
-{id:'ld17',n:'Leche de almendras',p:'250ml',k:95,pr:1.1,c:16.5,f:2.6},
-{id:'cb01',n:'Arroz blanco cocido',p:'100g',k:129,pr:2.7,c:28,f:0.3},
-{id:'cb02',n:'Arroz integral cocido',p:'100g',k:120,pr:2.9,c:24.9,f:0.9},
-{id:'cb03',n:'Pasta cocida',p:'100g',k:157,pr:5.8,c:30.7,f:0.9},
-{id:'cb04',n:'Avena cruda',p:'50g',k:190,pr:6.6,c:33.9,f:3.3},
-{id:'cb05',n:'Pan integral',p:'1 rebanada (35g)',k:88,pr:4.4,c:15,f:1.2},
-{id:'cb06',n:'Pan blanco',p:'1 rebanada (30g)',k:80,pr:2.7,c:14.8,f:1},
-{id:'cb07',n:'Pan de pita',p:'1 unidad (60g)',k:181,pr:6,c:36.7,f:0.8},
-{id:'cb08',n:'Patata hervida',p:'100g',k:125,pr:1.9,c:20.5,f:4.2},
-{id:'cb09',n:'Patata asada',p:'100g',k:206,pr:4.3,c:46.1,f:0.1},
-{id:'cb10',n:'Batata / Boniato',p:'100g',k:101,pr:1.2,c:23,f:0.3},
-{id:'cb11',n:'Maíz dulce',p:'100g',k:104,pr:3.3,c:19.5,f:0.8},
-{id:'cb12',n:'Lentejas cocidas',p:'100g',k:115,pr:9,c:20,f:0.4},
-{id:'cb13',n:'Garbanzos cocidos',p:'100g',k:163,pr:8.8,c:27.3,f:2.6},
-{id:'cb14',n:'Alubias blancas cocidas',p:'100g',k:138,pr:9.7,c:25,f:0.4},
-{id:'cb15',n:'Frijoles negros cocidos',p:'100g',k:131,pr:8.8,c:23.6,f:0.5},
-{id:'cb16',n:'Quinoa cocida',p:'100g',k:120,pr:4.4,c:21.3,f:1.9},
-{id:'fr01',n:'Banana / Plátano',p:'1 unidad (120g)',k:107,pr:1.3,c:27.4,f:0.4},
-{id:'fr02',n:'Manzana',p:'1 unidad (150g)',k:78,pr:0.4,c:20.7,f:0.3},
-{id:'fr03',n:'Naranja',p:'1 unidad (150g)',k:71,pr:1.4,c:17.6,f:0.2},
-{id:'fr04',n:'Pera',p:'1 unidad (150g)',k:86,pr:0.5,c:22.8,f:0.2},
-{id:'fr05',n:'Fresas',p:'100g',k:32,pr:0.7,c:7.7,f:0.3},
-{id:'fr06',n:'Arándanos',p:'100g',k:57,pr:0.7,c:14.5,f:0.3},
-{id:'fr07',n:'Uvas',p:'100g',k:69,pr:0.7,c:18.1,f:0.2},
-{id:'fr08',n:'Kiwi',p:'1 unidad (80g)',k:49,pr:0.9,c:11.7,f:0.4},
-{id:'fr09',n:'Mango',p:'100g',k:60,pr:0.8,c:15,f:0.4},
-{id:'fr10',n:'Piña',p:'100g',k:50,pr:0.5,c:13.1,f:0.1},
-{id:'fr11',n:'Sandía',p:'100g',k:30,pr:0.6,c:7.6,f:0.2},
-{id:'fr12',n:'Melón',p:'100g',k:34,pr:0.8,c:8.2,f:0.2},
-{id:'fr13',n:'Aguacate',p:'100g',k:160,pr:2,c:8.5,f:14.7},
-{id:'fr14',n:'Dátiles',p:'100g',k:282,pr:2.5,c:75.3,f:0.4},
-{id:'fr15',n:'Pasas / Uvas pasas',p:'30g',k:90,pr:0.9,c:23.8,f:0.1},
-{id:'vg01',n:'Espinacas crudas',p:'100g',k:23,pr:2.9,c:3.6,f:0.4},
-{id:'vg02',n:'Brócoli crudo',p:'100g',k:34,pr:2.8,c:6.6,f:0.4},
-{id:'vg03',n:'Zanahoria cruda',p:'100g',k:41,pr:0.9,c:9.6,f:0.2},
-{id:'vg04',n:'Tomate crudo',p:'100g',k:18,pr:0.9,c:3.9,f:0.2},
-{id:'vg05',n:'Pepino',p:'100g',k:12,pr:0.6,c:2.2,f:0.2},
-{id:'vg06',n:'Lechuga romana',p:'100g',k:19,pr:1.4,c:3.8,f:0.3},
-{id:'vg07',n:'Pimiento crudo',p:'100g',k:24,pr:0.9,c:5.1,f:0.2},
-{id:'vg08',n:'Cebolla',p:'100g',k:40,pr:1,c:9,f:0},
-{id:'vg09',n:'Champiñones crudos',p:'100g',k:22,pr:3.1,c:3.3,f:0.3},
-{id:'vg10',n:'Calabacín',p:'100g',k:14,pr:0.6,c:2.2,f:0.2},
-{id:'vg11',n:'Coliflor cruda',p:'100g',k:25,pr:1.9,c:5,f:0.3},
-{id:'vg12',n:'Berenjena',p:'100g',k:25,pr:1,c:5.9,f:0.2},
-{id:'vg13',n:'Acelga cruda',p:'100g',k:19,pr:1.8,c:3.7,f:0.2},
-{id:'vg14',n:'Coles de Bruselas',p:'100g',k:43,pr:3.4,c:9,f:0.3},
-{id:'vg15',n:'Ajo crudo',p:'10g',k:15,pr:0.6,c:3.3,f:0.1},
-{id:'gn01',n:'Almendras',p:'30g',k:182,pr:6.1,c:6.1,f:16.2},
-{id:'gn02',n:'Nueces castellanas',p:'30g',k:196,pr:4.6,c:4.1,f:19.6},
-{id:'gn03',n:'Anacardos',p:'30g',k:183,pr:3.6,c:9.1,f:15.9},
-{id:'gn04',n:'Pistachos',p:'30g',k:172,pr:6.3,c:8.5,f:13.7},
-{id:'gn05',n:'Cacahuetes sin tostar',p:'30g',k:170,pr:7.7,c:4.8,f:14.8},
-{id:'gn06',n:'Aceite de oliva',p:'1 cda (10ml)',k:88,pr:0,c:0,f:10},
-{id:'gn07',n:'Aceite de girasol',p:'1 cda (10ml)',k:88,pr:0,c:0,f:10},
-{id:'gn08',n:'Mantequilla',p:'10g',k:72,pr:0.1,c:0,f:8.1},
-{id:'gn09',n:'Semillas de chía',p:'30g',k:160,pr:5.5,c:8.7,f:12.6},
-{id:'gn10',n:'Semillas de girasol',p:'30g',k:175,pr:5.8,c:7.2,f:14.9},
-{id:'gn11',n:'Semillas de sésamo',p:'30g',k:170,pr:5.1,c:7.8,f:14.4},
-{id:'sp01',n:'Atún en agua escurrido',p:'100g',k:108,pr:25.5,c:0,f:0.6},
-{id:'sp02',n:'Claras de huevo líquidas',p:'100ml',k:52,pr:10.9,c:0.7,f:0.2},
-{id:'sp03',n:'Jamón cocido',p:'100g',k:114,pr:21,c:0.4,f:3},
-{id:'sp04',n:'Jamón serrano',p:'50g',k:121,pr:15.5,c:0,f:6.5},
-{id:'sp05',n:'Pechuga de pavo fiambre',p:'100g',k:124,pr:19.6,c:2.9,f:3.8},
-{id:'sn01',n:'Miel',p:'1 cda (20g)',k:61,pr:0.1,c:16.5,f:0},
-{id:'sn02',n:'Chocolate negro 70%',p:'30g',k:158,pr:1.4,c:18.1,f:10},
-{id:'sn03',n:'Hummus',p:'100g',k:260,pr:8.2,c:19.9,f:17.8},
-{id:'sn04',n:'Crema de cacahuete',p:'2 cdas (30g)',k:185,pr:7.1,c:6,f:16},
-{id:'sn05',n:'Crema chocolate avellanas',p:'20g',k:110,pr:1.2,c:12.1,f:6.6}
+/* ── PROTEÍNAS ANIMALES ── */
+{id:'pa01',n:'Pechuga de pollo asada',p:'100g',k:175,pr:26.4,c:0.1,f:7.7,u:'g'},
+{id:'pa02',n:'Pata/muslo pollo sin piel',p:'100g',k:172,pr:27.7,c:0,f:6.8,u:'g'},
+{id:'pa03',n:'Pollo con piel',p:'100g',k:298,pr:25.7,c:0,f:20.8,u:'g'},
+{id:'pa04',n:'Pavo',p:'100g',k:107,pr:21.9,c:0,f:2.2,u:'g'},
+{id:'pa05',n:'Huevo entero',p:'1 unidad (60g)',k:86,pr:7.5,c:0.4,f:5.7,u:'u',base:1},
+{id:'pa06',n:'Clara de huevo',p:'1 clara (35g)',k:18,pr:3.8,c:0.3,f:0.1,u:'u',base:1},
+{id:'pa07',n:'Yema de huevo',p:'1 yema (20g)',k:64,pr:3.2,c:0.7,f:5.3,u:'u',base:1},
+{id:'pa08',n:'Carne vaca magra',p:'100g',k:123,pr:20,c:0,f:5,u:'g'},
+{id:'pa09',n:'Carne vaca filete',p:'100g',k:197,pr:19,c:0,f:14,u:'g'},
+{id:'pa10',n:'Carne vaca solomillo',p:'100g',k:272,pr:17,c:0,f:23,u:'g'},
+{id:'pa11',n:'Carne ternera magra',p:'100g',k:109,pr:21,c:0,f:3,u:'g'},
+{id:'pa12',n:'Carne cerdo magra',p:'100g',k:147,pr:21,c:0,f:7,u:'g'},
+{id:'pa13',n:'Cerdo solomillo',p:'100g',k:142,pr:27.2,c:0,f:2.8,u:'g'},
+{id:'pa14',n:'Carne cordero magra',p:'100g',k:122,pr:20,c:0,f:3,u:'g'},
+{id:'pa15',n:'Carne conejo',p:'100g',k:124,pr:22,c:0,f:4,u:'g'},
+{id:'pa16',n:'Carne caballo',p:'100g',k:113,pr:21,c:0,f:3,u:'g'},
+/* ── PESCADOS ── */
+{id:'pe01',n:'Salmón crudo',p:'100g',k:127,pr:20.5,c:0,f:4.4,u:'g'},
+{id:'pe02',n:'Salmón al vapor',p:'100g',k:160,pr:25.8,c:0,f:5.5,u:'g'},
+{id:'pe03',n:'Salmón ahumado',p:'100g',k:117,pr:18.3,c:0,f:4.3,u:'g'},
+{id:'pe04',n:'Atún fresco crudo',p:'100g',k:109,pr:24.4,c:0,f:0.5,u:'g'},
+{id:'pe05',n:'Atún enlatado con aceite',p:'100g',k:198,pr:29.1,c:0,f:8.2,u:'g'},
+{id:'pe06',n:'Bacalao fresco',p:'100g',k:76,pr:17,c:0,f:1,u:'g'},
+{id:'pe07',n:'Merluza',p:'100g',k:89,pr:15.9,c:0,f:2.8,u:'g'},
+{id:'pe08',n:'Lubina al vapor',p:'100g',k:122,pr:23.2,c:0,f:2.5,u:'g'},
+{id:'pe09',n:'Dorada',p:'100g',k:140,pr:20.8,c:0,f:6.3,u:'g'},
+{id:'pe10',n:'Trucha',p:'100g',k:89,pr:16,c:0,f:3,u:'g'},
+{id:'pe11',n:'Caballa cruda',p:'100g',k:189,pr:19.1,c:0,f:11.9,u:'g'},
+{id:'pe12',n:'Sardinas cocidas',p:'100g',k:208,pr:24.6,c:0,f:11.5,u:'g'},
+{id:'pe13',n:'Anchoa enlatada',p:'100g',k:210,pr:28.9,c:0,f:9.7,u:'g'},
+{id:'pe14',n:'Gambas cocidas',p:'100g',k:96,pr:19.8,c:0,f:1.7,u:'g'},
+{id:'pe15',n:'Camarones al vapor',p:'100g',k:91,pr:17.4,c:1.2,f:1.3,u:'g'},
+{id:'pe16',n:'Mejillones al vapor',p:'100g',k:171,pr:23.7,c:7.4,f:4.5,u:'g'},
+/* ── LÁCTEOS ── */
+{id:'ld01',n:'Leche entera',p:'250ml',k:153,pr:7.9,c:12,f:8.1,u:'ml',base:250},
+{id:'ld02',n:'Leche desnatada',p:'250ml',k:85,pr:8.4,c:12.4,f:0.2,u:'ml',base:250},
+{id:'ld03',n:'Leche semidesnatada',p:'250ml',k:125,pr:8.3,c:12,f:5,u:'ml',base:250},
+{id:'ld04',n:'Yogur natural entero',p:'125g',k:76,pr:4.3,c:5.8,f:4.1,u:'g',base:125},
+{id:'ld05',n:'Yogur griego natural',p:'100g',k:97,pr:9,c:4,f:5,u:'g'},
+{id:'ld06',n:'Yogur desnatado natural',p:'125g',k:70,pr:7.2,c:9.6,f:0.2,u:'g',base:125},
+{id:'ld07',n:'Yogur griego con fruta',p:'100g',k:106,pr:7.3,c:12.3,f:3,u:'g'},
+{id:'ld08',n:'Queso fresco Burgos',p:'100g',k:167,pr:11,c:4,f:11,u:'g'},
+{id:'ld09',n:'Requesón / Ricota',p:'100g',k:156,pr:11.3,c:4.1,f:10.4,u:'g'},
+{id:'ld10',n:'Queso cheddar',p:'100g',k:404,pr:22.9,c:3.1,f:33.3,u:'g'},
+{id:'ld11',n:'Queso mozzarella',p:'100g',k:300,pr:22.2,c:2.2,f:22.4,u:'g'},
+{id:'ld12',n:'Queso feta',p:'100g',k:264,pr:14.2,c:4.1,f:21.3,u:'g'},
+{id:'ld13',n:'Queso parmesano rallado',p:'1 cda (30g)',k:126,pr:8.5,c:4.2,f:8.4,u:'cdas',base:1},
+{id:'ld14',n:'Queso manchego curado',p:'100g',k:420,pr:32,c:1,f:32,u:'g'},
+{id:'ld15',n:'Queso crema',p:'1 cda (30g)',k:105,pr:1.8,c:1.7,f:10.3,u:'cdas',base:1},
+{id:'ld16',n:'Leche de soja',p:'250ml',k:108,pr:6.5,c:12.3,f:3.7,u:'ml',base:250},
+{id:'ld17',n:'Leche de almendras',p:'250ml',k:95,pr:1.1,c:16.5,f:2.6,u:'ml',base:250},
+/* ── CEREALES Y CARBOS ── */
+{id:'cb01',n:'Arroz blanco cocido',p:'100g',k:129,pr:2.7,c:28,f:0.3,u:'g'},
+{id:'cb02',n:'Arroz integral cocido',p:'100g',k:120,pr:2.9,c:24.9,f:0.9,u:'g'},
+{id:'cb03',n:'Pasta cocida',p:'100g',k:157,pr:5.8,c:30.7,f:0.9,u:'g'},
+{id:'cb04',n:'Avena cruda',p:'50g',k:190,pr:6.6,c:33.9,f:3.3,u:'g',base:50},
+{id:'cb05',n:'Pan integral',p:'1 rebanada (35g)',k:88,pr:4.4,c:15,f:1.2,u:'u',base:1},
+{id:'cb06',n:'Pan blanco',p:'1 rebanada (30g)',k:80,pr:2.7,c:14.8,f:1,u:'u',base:1},
+{id:'cb07',n:'Pan de pita',p:'1 unidad (60g)',k:181,pr:6,c:36.7,f:0.8,u:'u',base:1},
+{id:'cb08',n:'Patata hervida',p:'100g',k:125,pr:1.9,c:20.5,f:4.2,u:'g'},
+{id:'cb09',n:'Patata asada',p:'100g',k:206,pr:4.3,c:46.1,f:0.1,u:'g'},
+{id:'cb10',n:'Batata / Boniato',p:'100g',k:101,pr:1.2,c:23,f:0.3,u:'g'},
+{id:'cb11',n:'Maíz dulce',p:'100g',k:104,pr:3.3,c:19.5,f:0.8,u:'g'},
+{id:'cb12',n:'Lentejas cocidas',p:'100g',k:115,pr:9,c:20,f:0.4,u:'g'},
+{id:'cb13',n:'Garbanzos cocidos',p:'100g',k:163,pr:8.8,c:27.3,f:2.6,u:'g'},
+{id:'cb14',n:'Alubias blancas cocidas',p:'100g',k:138,pr:9.7,c:25,f:0.4,u:'g'},
+{id:'cb15',n:'Frijoles negros cocidos',p:'100g',k:131,pr:8.8,c:23.6,f:0.5,u:'g'},
+{id:'cb16',n:'Quinoa cocida',p:'100g',k:120,pr:4.4,c:21.3,f:1.9,u:'g'},
+/* ── FRUTAS ── */
+{id:'fr01',n:'Banana / Plátano',p:'1 unidad',k:107,pr:1.3,c:27.4,f:0.4,u:'u',base:1},
+{id:'fr02',n:'Manzana',p:'1 unidad',k:78,pr:0.4,c:20.7,f:0.3,u:'u',base:1},
+{id:'fr03',n:'Naranja',p:'1 unidad',k:71,pr:1.4,c:17.6,f:0.2,u:'u',base:1},
+{id:'fr04',n:'Pera',p:'1 unidad',k:86,pr:0.5,c:22.8,f:0.2,u:'u',base:1},
+{id:'fr05',n:'Fresas',p:'100g',k:32,pr:0.7,c:7.7,f:0.3,u:'g'},
+{id:'fr06',n:'Arándanos',p:'100g',k:57,pr:0.7,c:14.5,f:0.3,u:'g'},
+{id:'fr07',n:'Uvas',p:'100g',k:69,pr:0.7,c:18.1,f:0.2,u:'g'},
+{id:'fr08',n:'Kiwi',p:'1 unidad',k:49,pr:0.9,c:11.7,f:0.4,u:'u',base:1},
+{id:'fr09',n:'Mango',p:'100g',k:60,pr:0.8,c:15,f:0.4,u:'g'},
+{id:'fr10',n:'Piña',p:'100g',k:50,pr:0.5,c:13.1,f:0.1,u:'g'},
+{id:'fr11',n:'Sandía',p:'100g',k:30,pr:0.6,c:7.6,f:0.2,u:'g'},
+{id:'fr12',n:'Melón',p:'100g',k:34,pr:0.8,c:8.2,f:0.2,u:'g'},
+{id:'fr13',n:'Aguacate',p:'100g',k:160,pr:2,c:8.5,f:14.7,u:'g'},
+{id:'fr14',n:'Dátiles',p:'100g',k:282,pr:2.5,c:75.3,f:0.4,u:'g'},
+{id:'fr15',n:'Pasas / Uvas pasas',p:'30g',k:90,pr:0.9,c:23.8,f:0.1,u:'g',base:30},
+/* ── VERDURAS ── */
+{id:'vg01',n:'Espinacas crudas',p:'100g',k:23,pr:2.9,c:3.6,f:0.4,u:'g'},
+{id:'vg02',n:'Brócoli crudo',p:'100g',k:34,pr:2.8,c:6.6,f:0.4,u:'g'},
+{id:'vg03',n:'Zanahoria cruda',p:'100g',k:41,pr:0.9,c:9.6,f:0.2,u:'g'},
+{id:'vg04',n:'Tomate crudo',p:'100g',k:18,pr:0.9,c:3.9,f:0.2,u:'g'},
+{id:'vg05',n:'Pepino',p:'100g',k:12,pr:0.6,c:2.2,f:0.2,u:'g'},
+{id:'vg06',n:'Lechuga romana',p:'100g',k:19,pr:1.4,c:3.8,f:0.3,u:'g'},
+{id:'vg07',n:'Pimiento crudo',p:'100g',k:24,pr:0.9,c:5.1,f:0.2,u:'g'},
+{id:'vg08',n:'Cebolla',p:'100g',k:40,pr:1,c:9,f:0,u:'g'},
+{id:'vg09',n:'Champiñones crudos',p:'100g',k:22,pr:3.1,c:3.3,f:0.3,u:'g'},
+{id:'vg10',n:'Calabacín',p:'100g',k:14,pr:0.6,c:2.2,f:0.2,u:'g'},
+{id:'vg11',n:'Coliflor cruda',p:'100g',k:25,pr:1.9,c:5,f:0.3,u:'g'},
+{id:'vg12',n:'Berenjena',p:'100g',k:25,pr:1,c:5.9,f:0.2,u:'g'},
+{id:'vg13',n:'Acelga cruda',p:'100g',k:19,pr:1.8,c:3.7,f:0.2,u:'g'},
+{id:'vg14',n:'Coles de Bruselas',p:'100g',k:43,pr:3.4,c:9,f:0.3,u:'g'},
+{id:'vg15',n:'Ajo crudo',p:'1 diente (10g)',k:15,pr:0.6,c:3.3,f:0.1,u:'u',base:1},
+/* ── GRASAS Y FRUTOS SECOS ── */
+{id:'gn01',n:'Almendras',p:'30g',k:182,pr:6.1,c:6.1,f:16.2,u:'g',base:30},
+{id:'gn02',n:'Nueces castellanas',p:'30g',k:196,pr:4.6,c:4.1,f:19.6,u:'g',base:30},
+{id:'gn03',n:'Anacardos',p:'30g',k:183,pr:3.6,c:9.1,f:15.9,u:'g',base:30},
+{id:'gn04',n:'Pistachos',p:'30g',k:172,pr:6.3,c:8.5,f:13.7,u:'g',base:30},
+{id:'gn05',n:'Cacahuetes sin tostar',p:'30g',k:170,pr:7.7,c:4.8,f:14.8,u:'g',base:30},
+{id:'gn06',n:'Aceite de oliva',p:'1 cucharada (10ml)',k:88,pr:0,c:0,f:10,u:'cdas',base:1},
+{id:'gn07',n:'Aceite de girasol',p:'1 cucharada (10ml)',k:88,pr:0,c:0,f:10,u:'cdas',base:1},
+{id:'gn08',n:'Mantequilla',p:'1 cucharada (10g)',k:72,pr:0.1,c:0,f:8.1,u:'cdas',base:1},
+{id:'gn09',n:'Semillas de chía',p:'1 cda (30g)',k:160,pr:5.5,c:8.7,f:12.6,u:'cdas',base:1},
+{id:'gn10',n:'Semillas de girasol',p:'30g',k:175,pr:5.8,c:7.2,f:14.9,u:'g',base:30},
+{id:'gn11',n:'Semillas de sésamo',p:'1 cda (15g)',k:85,pr:2.5,c:3.9,f:7.2,u:'cdas',base:1},
+/* ── PROTEÍNAS / SUPLEMENTOS ── */
+{id:'sp01',n:'Atún en agua escurrido',p:'1 lata (100g)',k:108,pr:25.5,c:0,f:0.6,u:'u',base:1},
+{id:'sp02',n:'Claras de huevo líquidas',p:'100ml',k:52,pr:10.9,c:0.7,f:0.2,u:'ml',base:100},
+{id:'sp03',n:'Jamón cocido',p:'100g',k:114,pr:21,c:0.4,f:3,u:'g'},
+{id:'sp04',n:'Jamón serrano',p:'50g',k:121,pr:15.5,c:0,f:6.5,u:'g',base:50},
+{id:'sp05',n:'Pechuga de pavo fiambre',p:'100g',k:124,pr:19.6,c:2.9,f:3.8,u:'g'},
+{id:'sp06',n:'Whey protein polvo',p:'1 scoop (30g)',k:120,pr:24,c:3,f:1.5,u:'cdas',base:1},
+{id:'sp07',n:'Proteína vegana polvo',p:'1 scoop (30g)',k:110,pr:20,c:6,f:2,u:'cdas',base:1},
+{id:'sp08',n:'Caseína polvo',p:'1 scoop (30g)',k:115,pr:23,c:4,f:1,u:'cdas',base:1},
+{id:'sp09',n:'Creatina polvo',p:'1 cucharadita (5g)',k:0,pr:0,c:0,f:0,u:'cdas',base:1},
+/* ── SNACKS ── */
+{id:'sn01',n:'Miel',p:'1 cucharada (20g)',k:61,pr:0.1,c:16.5,f:0,u:'cdas',base:1},
+{id:'sn02',n:'Chocolate negro 70%',p:'30g',k:158,pr:1.4,c:18.1,f:10,u:'g',base:30},
+{id:'sn03',n:'Hummus',p:'100g',k:260,pr:8.2,c:19.9,f:17.8,u:'g'},
+{id:'sn04',n:'Crema de cacahuete',p:'2 cdas (30g)',k:185,pr:7.1,c:6,f:16,u:'cdas',base:1},
+{id:'sn05',n:'Crema chocolate avellanas',p:'1 cda (20g)',k:110,pr:1.2,c:12.1,f:6.6,u:'cdas',base:1}
 ];
 
 // ════════════ STATE ════════════
@@ -1742,7 +1889,7 @@ function rNutri(){
 
     // Buscador simple
     h.push('<div class="f-search">');
-    h.push('<input class="f-input f-search-input" id="fsrch-'+mid+'" data-mid="'+mid+'" placeholder="Buscar alimento..." autocomplete="off" autocorrect="off" autocapitalize="off">');
+    h.push('<input class="f-input f-search-input" id="fsrch-'+mid+'" data-mid="'+mid+'" placeholder="Buscar alimento... (ej: pollo, arroz, huevo)" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">');
     h.push('</div>');
     // Resultados de búsqueda
     h.push('<div class="f-results" id="fres-'+mid+'" style="display:none"></div>');
@@ -1750,7 +1897,10 @@ function rNutri(){
     h.push('<div class="f-selected-chip" id="fchip-'+mid+'" style="display:none"></div>');
     // Fila cantidad + botón agregar
     h.push('<div class="qty-row" id="fqty-'+mid+'" style="display:none">');
-    h.push('<input class="qty-in" id="fqtyv-'+mid+'" type="number" inputmode="decimal" autocomplete="off">');
+    h.push('<div class="qty-field">');
+    h.push('<input class="qty-in" id="fqtyv-'+mid+'" type="number" inputmode="decimal" placeholder="Cantidad" autocomplete="off" step="1">');
+    h.push('<span class="qty-unit-lbl" id="fqtylbl-'+mid+'">g</span>');
+    h.push('</div>');
     h.push('<button class="qty-add" data-action="add" data-mid="'+mid+'">AGREGAR</button>');
     h.push('</div>');
     // Entrada libre separada
@@ -1829,30 +1979,43 @@ function fSrch(inp,mid){
   var q=(inp.value||'').trim().toLowerCase();
   var res=document.getElementById('fres-'+mid);
   if(!res)return;
-  if(!q){res.style.display='none';return;}
+
+  if(!q){
+    res.style.display='none';
+    res.innerHTML='';
+    return;
+  }
+
   var allFoods=getAllFoods();
   var found=allFoods.filter(function(f){
-    return f.n.toLowerCase().indexOf(q)>=0;
-  }).slice(0,14);
-  var html='';
+    return (f.n||'').toLowerCase().indexOf(q)>=0;
+  }).slice(0,16);
+
+  var html='<div style="padding:4px 0">';
+
   if(found.length){
-    html=found.map(function(f){
+    html+=found.map(function(f){
       var badge=f._custom?'<span class="fr-badge-custom">M\u00cdO</span>':'';
       return '<div class="fr-item" data-fid="'+f.id+'" data-mid="'+mid+'">'
-        +'<div><div class="fr-name">'+f.n+badge+'</div>'
-        +'<div class="fr-mac">'+f.p+' \u00b7 '+f.pr+'g prot \u00b7 '+f.k+' kcal</div></div>'
-        +'<span style="font-size:18px;color:var(--tx3)">+</span>'
+        +'<div class="fr-item-info">'
+        +'<span class="fr-name">'+f.n+badge+'</span>'
+        +'<span class="fr-mac">'+f.p+' \u00b7 '+f.pr+'g prot \u00b7 '+f.k+' kcal</span>'
+        +'</div>'
+        +'<span class="fr-plus">+</span>'
         +'</div>';
     }).join('');
   } else {
-    html='<div class="fr-empty">Sin resultados para "'+q+'"</div>';
+    html+='<div class="fr-empty">Sin resultados para "'+q+'"</div>';
   }
-  // Botón crear
+
+  // Bot\u00f3n crear alimento personalizado
   html+='<div class="f-create-btn" data-action="create" data-mid="'+mid+'">'
     +'<div class="f-create-icon">+</div>'
     +'<div><div class="f-create-text">Crear "'+q+'"</div>'
-    +'<div class="f-create-sub">Guardar como alimento personalizado</div></div>'
+    +'<div class="f-create-sub">Guardar en mis alimentos</div></div>'
     +'</div>';
+
+  html+='</div>';
   res.innerHTML=html;
   res.style.display='block';
 }
@@ -1868,60 +2031,110 @@ function fSel(mid,fid){
   if(srch)srch.value='';
   if(res)res.style.display='none';
 
+  // Determinar unidad y label del campo de cantidad
+  var u=food.u||'g';
+  var base=food.base||100;
+  var unitLabel, placeholder, inputType, inputMode, defaultVal;
+
+  if(u==='u'){
+    unitLabel='unidades';
+    placeholder='Cantidad (ej: 1, 2, 3...)';
+    inputType='number';
+    inputMode='numeric';
+    defaultVal='1';
+  } else if(u==='cdas'){
+    unitLabel='porciones/cucharadas';
+    placeholder='Cantidad (ej: 1, 2, 3...)';
+    inputType='number';
+    inputMode='numeric';
+    defaultVal='1';
+  } else if(u==='ml'){
+    unitLabel='ml';
+    placeholder='Cantidad en ml (ej: 200, 250...)';
+    inputType='number';
+    inputMode='decimal';
+    defaultVal=String(base);
+  } else {
+    unitLabel='gramos';
+    placeholder='Cantidad en gramos (ej: 100, 150...)';
+    inputType='number';
+    inputMode='decimal';
+    defaultVal=String(base);
+  }
+
   // Mostrar chip con alimento seleccionado
   var chip=document.getElementById('fchip-'+mid);
   if(chip){
-    chip.innerHTML='<span class="f-sel-name">'+food.n+'</span>'
-      +'<span class="f-sel-macros">'+food.k+' kcal \u00b7 '+food.pr+'g prot</span>'
+    chip.innerHTML=''
+      +'<span class="f-sel-name">'+food.n+'</span>'
+      +'<span class="f-sel-macros">'+food.k+' kcal / '+food.p+'</span>'
       +'<button class="f-sel-clear" data-action="clear-sel" data-mid="'+mid+'">\u2715</button>';
     chip.style.display='flex';
   }
 
-  // Mostrar qty-row con placeholder de la porción
+  // Actualizar el campo de cantidad con el tipo correcto
   var qrow=document.getElementById('fqty-'+mid);
   var qv=document.getElementById('fqtyv-'+mid);
+  var qlbl=document.getElementById('fqtylbl-'+mid);
+
   if(qrow)qrow.style.display='flex';
+  if(qlbl)qlbl.textContent=unitLabel;
   if(qv){
-    qv.placeholder='Cantidad en g (por defecto: 100g)';
-    qv.value='';
-    setTimeout(function(){qv.focus();},100);
+    qv.type=inputType;
+    qv.inputMode=inputMode;
+    qv.placeholder=placeholder;
+    qv.value=defaultVal;
+    qv.min='0.1';
+    qv.step=(u==='u'||u==='cdas')?'1':'10';
+    setTimeout(function(){qv.focus();qv.select();},150);
   }
 }
 
 function fAdd(mid){
   if(!mSel||mMid!==mid){
-    sNotif('Primero buscá y seleccion\u00e1 un alimento');
+    sNotif('Primero seleccion\u00e1 un alimento de la lista');
     return;
   }
   var qv=document.getElementById('fqtyv-'+mid);
-  var qty=qv?parseFloat(qv.value)||100:100;
-  var base=100;
+  var qty=qv?parseFloat(qv.value):null;
+  if(!qty||isNaN(qty)||qty<=0)qty=mSel.base||100;
+
+  var u=mSel.u||'g';
+  var base=mSel.base||100;
+  var mult=qty/base;
+
+  // Etiqueta de cantidad
+  var qtyLabel;
+  if(u==='u') qtyLabel=qty+(qty===1?' unidad':' unidades');
+  else if(u==='cdas') qtyLabel=qty+(qty===1?' cucharada':' cucharadas');
+  else if(u==='ml') qtyLabel=qty+'ml';
+  else qtyLabel=qty+'g';
+
   var item={
     _rid:'ri_'+Date.now()+'_'+Math.random().toString(36).slice(2,7),
     n:mSel.n,
-    q:qty+'g',
-    k:Math.round(parseFloat(mSel.k||0)*qty/base),
-    pr:Math.round(parseFloat(mSel.pr||0)*qty/base*10)/10,
-    c:Math.round(parseFloat(mSel.c||0)*qty/base*10)/10,
-    f:Math.round(parseFloat(mSel.f||0)*qty/base*10)/10
+    q:qtyLabel,
+    k:Math.round(parseFloat(mSel.k||0)*mult),
+    pr:Math.round(parseFloat(mSel.pr||0)*mult*10)/10,
+    c:Math.round(parseFloat(mSel.c||0)*mult*10)/10,
+    f:Math.round(parseFloat(mSel.f||0)*mult*10)/10
   };
+
   if(!nDay[mid])nDay[mid]=[];
   nDay[mid].push(item);
   saveN();
 
-  // Actualizar UI del meal
+  // Abrir meal y actualizar UI
   var mb=document.getElementById('meal-'+mid);
   if(mb&&!mb.classList.contains('open'))mb.classList.add('open');
   var fiEl=document.getElementById('fitems-'+mid);
   if(fiEl)fiEl.innerHTML=renderItems(mid);
   updMealKcal(mid);
-
-  // Actualizar dashboard INMEDIATAMENTE
   updDashboard();
 
-  // Resetear el buscador
+  // Reset buscador
   resetFoodSearch(mid);
-  sNotif('\u2713 '+item.n+' \u2014 '+item.k+' kcal agregado');
+  sNotif('\u2713 '+qtyLabel+' de '+mSel.n+' \u2014 '+item.k+' kcal');
 }
 
 function resetFoodSearch(mid){
@@ -3167,14 +3380,16 @@ document.addEventListener('DOMContentLoaded', function(){
       fSel(frItem.dataset.mid,frItem.dataset.fid);
     }
   });
-  // ── Input delegation para el buscador ──
-  document.addEventListener('input', function(e){
+  // ── Input delegation para el buscador (también por keyup para iOS) ──
+  function _handleSearch(e){
     var t=e.target;
-    if(t.classList.contains('f-search-input')){
-      var mid=t.dataset.mid;
+    if(t&&t.classList&&t.classList.contains('f-search-input')){
+      var mid=t.dataset.mid||t.getAttribute('data-mid');
       if(mid)fSrch(t,mid);
     }
-  });
+  }
+  document.addEventListener('input',_handleSearch);
+  document.addEventListener('keyup',_handleSearch);
 
   buildSessions();
   lN();
