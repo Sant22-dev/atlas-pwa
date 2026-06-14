@@ -1295,6 +1295,712 @@ canvas.ch{display:block;width:100%!important}
 }
 .meal-add-btn:active{border-color:var(--gold);color:var(--gold);background:var(--gold2)}
 .meal-add-btn-icon{font-size:18px;color:var(--gold)}
+
+/* ── Variables premium ── */
+:root {
+  --bg:    #0d0f14;
+  --bg2:   #13161e;
+  --bg3:   #181c27;
+  --bg4:   #1e2335;
+  --bg5:   #252b42;
+  --bg-card: linear-gradient(145deg,#1a1e2e 0%,#141820 100%);
+  --bd:    rgba(255,255,255,.05);
+  --bd2:   rgba(255,255,255,.09);
+  --bd3:   rgba(255,255,255,.16);
+  --tx:    #f2f4f8;
+  --tx2:   #c2c8d6;
+  --tx3:   #6b7280;
+  --tx4:   #3d4450;
+  --gold:  #f2c94c;
+  --gold2: rgba(242,201,76,.08);
+  --gold3: rgba(242,201,76,.2);
+  --pull:  #00d4a0;
+  --pull2: rgba(0,212,160,.08);
+  --pull3: rgba(0,212,160,.2);
+  --push:  #ff5240;
+  --push2: rgba(255,82,64,.08);
+  --push3: rgba(255,82,64,.2);
+  --legs:  #9b6dff;
+  --legs2: rgba(155,109,255,.08);
+  --legs3: rgba(155,109,255,.2);
+  --cobalt:#4a90e2;
+  --r: 12px;--r2: 16px;--r3: 22px;
+  --hh: 62px;--th: 48px;
+  --st: env(safe-area-inset-top,0px);
+  --sb: env(safe-area-inset-bottom,0px);
+  --font-display:'Bebas Neue',sans-serif;
+  --font-body:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',Roboto,sans-serif;
+  --font-mono:'SF Mono','JetBrains Mono','Fira Code',monospace;
+}
+
+/* ── Nutrición — panel de búsqueda mejorado ── */
+#food-search-panel{
+  background:rgba(0,0,0,.85)!important;
+  backdrop-filter:blur(16px)!important;
+  -webkit-backdrop-filter:blur(16px)!important;
+}
+.fsp-sheet{
+  background:linear-gradient(180deg,#1a1e2e 0%,#0f1117 100%)!important;
+  border-radius:24px 24px 0 0!important;
+  border-top:1px solid rgba(242,201,76,.15)!important;
+}
+.fsp-input{
+  background:#1e2335!important;
+  border:1.5px solid rgba(255,255,255,.12)!important;
+  border-radius:14px!important;
+  font-size:16px!important;
+  min-height:52px!important;
+}
+.fsp-input:focus{border-color:var(--gold)!important;box-shadow:0 0 0 3px rgba(242,201,76,.1)!important}
+.fsp-item{min-height:60px!important;padding:14px 18px!important}
+.fsp-item-name{font-size:15px!important;font-weight:600!important}
+.fsp-item-mac{font-size:11px!important;margin-top:3px!important}
+.fsp-add-btn{
+  background:var(--gold)!important;
+  border-radius:14px!important;
+  font-size:18px!important;
+  min-height:52px!important;
+  padding:13px 24px!important;
+}
+.fsp-qty-input{
+  background:#1e2335!important;
+  border:1.5px solid rgba(255,255,255,.12)!important;
+  border-radius:14px!important;
+  font-size:20px!important;
+  font-weight:700!important;
+  min-height:52px!important;
+}
+.fsp-qty-input:focus{border-color:var(--gold)!important}
+
+/* ── Meal add button ── */
+.meal-add-btn{
+  border:1.5px dashed rgba(242,201,76,.25)!important;
+  border-radius:12px!important;
+  padding:13px!important;
+  font-size:14px!important;
+  font-weight:600!important;
+  letter-spacing:.3px!important;
+}
+.meal-add-btn:active{
+  border-color:var(--gold)!important;
+  color:var(--gold)!important;
+  background:var(--gold2)!important;
+}
+
+/* ── Dashboard nutrición ── */
+.kcal-current{
+  font-family:var(--font-display)!important;
+  font-size:52px!important;
+  letter-spacing:-1px!important;
+  line-height:1!important;
+}
+.kcal-sep,.kcal-goal{
+  font-family:var(--font-mono)!important;
+  font-size:18px!important;
+  color:var(--tx3)!important;
+}
+.prog-bar-track{height:10px!important;border-radius:5px!important;background:rgba(255,255,255,.06)!important}
+.prog-bar-fill{height:100%!important;border-radius:5px!important;transition:width .6s cubic-bezier(.4,0,.2,1)!important}
+.macro-bar-track{height:6px!important;border-radius:3px!important;background:rgba(255,255,255,.06)!important}
+.macro-bar-fill{border-radius:3px!important;transition:width .5s cubic-bezier(.4,0,.2,1)!important}
+.macro-bar-lbl{font-size:13px!important;font-weight:600!important;color:var(--tx2)!important;width:70px!important}
+.macro-bar-nums{font-family:var(--font-mono)!important;font-size:12px!important;color:var(--tx2)!important}
+
+/* ── Sección Nutrición ── */
+.meal-sec-lbl{
+  font-size:10px!important;font-weight:700!important;
+  letter-spacing:3px!important;text-transform:uppercase!important;
+  color:var(--tx3)!important;padding:16px 16px 8px!important;
+}
+.meal{
+  border-radius:16px!important;
+  border:1px solid rgba(255,255,255,.06)!important;
+  margin:0 14px 8px!important;
+  overflow:visible!important;
+  box-shadow:0 2px 16px rgba(0,0,0,.3)!important;
+}
+.meal.open{border-color:rgba(255,255,255,.1)!important}
+.meal-hdr{padding:15px 16px!important}
+.meal-name{font-size:15px!important;font-weight:700!important}
+.meal-time{font-size:12px!important;color:var(--tx3)!important}
+.meal-ico{
+  width:38px!important;height:38px!important;border-radius:10px!important;
+  background:var(--bg4)!important;border:1px solid var(--bd2)!important;
+  font-size:18px!important;display:flex!important;
+  align-items:center!important;justify-content:center!important;
+  flex-shrink:0!important;
+}
+
+/* ── Items del día ── */
+.fi{
+  display:flex!important;align-items:center!important;
+  justify-content:space-between!important;
+  padding:10px 0!important;border-bottom:1px solid rgba(255,255,255,.04)!important;gap:8px!important;
+}
+.fi:last-child{border-bottom:none!important}
+.fi-name{font-size:14px!important;font-weight:500!important;color:var(--tx)!important}
+.fi-mac{font-family:var(--font-mono)!important;font-size:11px!important;color:var(--tx3)!important;margin-top:2px!important}
+.fi-qty{font-size:11px!important;color:var(--tx3)!important;
+  background:var(--bg4)!important;padding:2px 6px!important;
+  border-radius:5px!important;border:1px solid var(--bd)!important;}
+.fi-empty{font-size:13px!important;color:var(--tx3)!important;padding:10px 0!important}
+
+/* ── Botones de agua ── */
+.water-btn{border-radius:10px!important;font-weight:700!important}
+.water-btn.main{
+  background:rgba(0,212,160,.1)!important;
+  border-color:rgba(0,212,160,.25)!important;
+  color:var(--pull)!important;
+}
+
+/* ── Quick btns ── */
+.qb-val{font-family:var(--font-display)!important;font-size:22px!important;display:block!important;line-height:1!important;margin-bottom:3px!important}
+
+/* ── Notificación ── */
+#notif{
+  background:rgba(13,15,20,.97)!important;
+  border:1px solid rgba(242,201,76,.2)!important;
+  border-radius:14px!important;
+  padding:12px 22px!important;
+  font-size:14px!important;
+  font-weight:600!important;
+  box-shadow:0 8px 32px rgba(0,0,0,.6)!important;
+}
+
+/* ── Exercise cards ── */
+.ec{
+  border-radius:16px!important;
+  border:1px solid rgba(255,255,255,.06)!important;
+  margin:0 14px 8px!important;
+  box-shadow:0 2px 12px rgba(0,0,0,.25)!important;
+}
+.ec-name{font-size:15px!important;font-weight:700!important;letter-spacing:.1px!important}
+.s-in{
+  font-size:15px!important;font-weight:700!important;
+  min-height:46px!important;border-radius:9px!important;
+  border:1px solid var(--bd2)!important;
+  background:var(--bg4)!important;
+}
+.s-ck{
+  width:42px!important;height:42px!important;
+  border-radius:11px!important;font-size:17px!important;
+  border:1.5px solid var(--bd2)!important;
+}
+
+/* ── Historia cards ── */
+.hc{
+  background:var(--bg-card)!important;
+  border:1px solid rgba(255,255,255,.06)!important;
+  border-radius:16px!important;
+  padding:16px!important;
+  box-shadow:0 2px 12px rgba(0,0,0,.3)!important;
+}
+.hst-v{font-family:var(--font-display)!important;font-size:30px!important;line-height:1!important}
+
+/* ── Timer ── */
+#tmr{
+  border:1px solid rgba(242,201,76,.2)!important;
+  background:rgba(13,15,20,.97)!important;
+  border-radius:18px!important;
+  box-shadow:0 8px 40px rgba(0,0,0,.7)!important;
+}
+#tmr-val{font-size:44px!important;font-weight:700!important;letter-spacing:-2px!important}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar{width:2px;height:2px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:rgba(255,255,255,.12);border-radius:1px}
+
+/* ── Animaciones ── */
+@keyframes fade-up{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.meal,.ec,.hc{animation:fade-up .25s ease-out both}
+
+/* ── Active states ── */
+.ntab.push.on{color:var(--push)!important;border-bottom-color:var(--push)!important}
+.ntab.pull.on{color:var(--pull)!important;border-bottom-color:var(--pull)!important}
+.ntab.legs.on{color:var(--legs)!important;border-bottom-color:var(--legs)!important}
+.ntab.spec.on{color:var(--gold)!important;border-bottom-color:var(--gold)!important}
+
+/* ════════════════════════════════════════════════════════════
+   ATLAS SPORT LAB — Rediseño Premium v2 — Jun 2026
+   Basado en InBody + plan nutricionista profesional
+   Pesos reales historial Notion semanas 1-9
+════════════════════════════════════════════════════════════ */
+
+/* ── Variables maestras ── */
+:root {
+  --bg:    #0c0e14;
+  --bg2:   #111520;
+  --bg3:   #161b28;
+  --bg4:   #1c2236;
+  --bg5:   #232a42;
+  --card:  linear-gradient(150deg,#191e2e 0%,#121620 100%);
+  --bd:    rgba(255,255,255,.04);
+  --bd2:   rgba(255,255,255,.08);
+  --bd3:   rgba(255,255,255,.14);
+  --bd-gold: rgba(242,201,76,.18);
+  --tx:    #eef0f6;
+  --tx2:   #b8bece;
+  --tx3:   #5d6680;
+  --tx4:   #333a52;
+  --gold:  #f2c94c;
+  --gold2: rgba(242,201,76,.07);
+  --gold3: rgba(242,201,76,.18);
+  --pull:  #00d4a0;
+  --pull2: rgba(0,212,160,.07);
+  --pull3: rgba(0,212,160,.18);
+  --push:  #ff5240;
+  --push2: rgba(255,82,64,.07);
+  --push3: rgba(255,82,64,.18);
+  --legs:  #9b6dff;
+  --legs2: rgba(155,109,255,.07);
+  --legs3: rgba(155,109,255,.18);
+  --font-display: 'Bebas Neue', sans-serif;
+  --font-body: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif;
+  --font-mono: 'SF Mono', 'JetBrains Mono', monospace;
+  --r: 12px; --r2: 16px; --r3: 22px;
+  --hh: 60px; --th: 48px;
+  --st: env(safe-area-inset-top,0px);
+  --sb: env(safe-area-inset-bottom,0px);
+}
+
+/* ── Base ── */
+html, body {
+  background: var(--bg);
+  color: var(--tx);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Header ── */
+#hdr {
+  background: rgba(12,14,20,.96);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--bd2);
+}
+.logo { font-size: 32px; letter-spacing: 7px; }
+.logo em { color: var(--gold); text-shadow: 0 0 24px rgba(242,201,76,.3); font-style: normal; }
+
+/* ── Navegación ── */
+#nav {
+  background: rgba(12,14,20,.9);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--bd);
+}
+.ntab {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--tx4);
+  padding: 12px 16px 14px;
+  border-bottom: 2px solid transparent;
+  transition: all .2s cubic-bezier(.4,0,.2,1);
+}
+.ntab:not(.on) { color: var(--tx3); }
+.ntab.push.on { color: var(--push); border-bottom-color: var(--push); }
+.ntab.pull.on { color: var(--pull); border-bottom-color: var(--pull); }
+.ntab.legs.on { color: var(--legs); border-bottom-color: var(--legs); }
+.ntab.spec.on { color: var(--gold); border-bottom-color: var(--gold); }
+
+/* ── Exercise cards ── */
+.ec {
+  margin: 0 14px 8px;
+  border-radius: 16px;
+  background: var(--card);
+  border: 1px solid var(--bd);
+  overflow: hidden;
+  box-shadow: 0 2px 16px rgba(0,0,0,.3);
+  transition: all .22s cubic-bezier(.4,0,.2,1);
+}
+.ec.open { border-color: var(--bd2); box-shadow: 0 4px 28px rgba(0,0,0,.45); }
+.ec-hdr { display: flex; align-items: center; gap: 14px; padding: 16px; cursor: pointer; }
+.ec-num {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--tx3);
+  width: 18px;
+  flex-shrink: 0;
+}
+.ec-name {
+  flex: 1;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--tx);
+  letter-spacing: .1px;
+  line-height: 1.3;
+}
+.ec-arr { color: var(--tx4); font-size: 12px; transition: transform .2s; }
+.ec.open .ec-arr { transform: rotate(180deg); }
+.ec-body { padding: 0 16px 16px; }
+.ec-note {
+  font-size: 12px;
+  color: var(--tx2);
+  line-height: 1.6;
+  padding: 8px 12px 10px;
+  border-left: 2px solid var(--bd3);
+  margin-bottom: 12px;
+  border-radius: 0 8px 8px 0;
+  background: rgba(255,255,255,.02);
+}
+.ec-tag {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 5px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.push .ec-tag { background: var(--push2); color: var(--push); border: 1px solid var(--push3); }
+.pull .ec-tag { background: var(--pull2); color: var(--pull); border: 1px solid var(--pull3); }
+.legs .ec-tag { background: var(--legs2); color: var(--legs); border: 1px solid var(--legs3); }
+.ec-drop {
+  font-size: 12px;
+  color: var(--push);
+  background: var(--push2);
+  border: 1px solid var(--push3);
+  border-radius: 8px;
+  padding: 8px 12px;
+  margin-top: 8px;
+  line-height: 1.5;
+}
+
+/* ── Sets table ── */
+.stbl { width: 100%; border-collapse: collapse; margin-top: 6px; }
+.stbl th {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--tx3);
+  padding: 0 6px 12px;
+  text-align: center;
+}
+.stbl td { padding: 5px 4px; text-align: center; vertical-align: middle; }
+.s-lbl {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--tx3);
+  text-align: center;
+  min-width: 28px;
+}
+.s-obj {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--tx2);
+  text-align: center;
+  font-weight: 500;
+}
+.s-in {
+  width: 52px;
+  background: var(--bg4);
+  border: 1px solid var(--bd2);
+  border-radius: 9px;
+  padding: 8px 4px;
+  color: var(--tx);
+  font-family: var(--font-mono);
+  font-size: 15px;
+  font-weight: 700;
+  text-align: center;
+  -webkit-appearance: none;
+  outline: none;
+  min-height: 46px;
+  transition: all .15s;
+}
+.s-in:focus { border-color: var(--gold); box-shadow: 0 0 0 2px rgba(242,201,76,.12); }
+.s-in.hit { border-color: var(--pull); color: var(--pull); background: var(--pull2); }
+.s-ck {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  border: 1.5px solid var(--bd2);
+  background: var(--bg4);
+  color: var(--tx3);
+  font-size: 16px;
+  transition: all .18s cubic-bezier(.34,1.56,.64,1);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.push .s-ck.dn { background: var(--push3); border-color: var(--push); color: var(--push); transform: scale(1.06); }
+.pull .s-ck.dn { background: var(--pull3); border-color: var(--pull); color: var(--pull); transform: scale(1.06); }
+.legs .s-ck.dn { background: var(--legs3); border-color: var(--legs); color: var(--legs); transform: scale(1.06); }
+
+/* ── Session hero ── */
+.sv-hero { padding: 22px 18px 14px; background: linear-gradient(180deg,rgba(242,201,76,.03) 0%,transparent 60%); }
+.sv-name { font-family: var(--font-display); font-size: 58px; letter-spacing: 2px; line-height: .95; color: var(--tx); }
+.sv-sub { font-size: 13px; color: var(--tx2); margin-top: 5px; }
+.sv-day { font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--tx3); margin-bottom: 4px; }
+.sv-prog-row { display: flex; gap: 5px; margin: 12px 0 6px; }
+.sv-prog-day { flex: 1; height: 4px; border-radius: 2px; background: var(--bd2); transition: all .4s cubic-bezier(.4,0,.2,1); }
+.push .sv-prog-day.done { background: var(--push); }
+.pull .sv-prog-day.done { background: var(--pull); }
+.legs .sv-prog-day.done { background: var(--legs); }
+.sv-prog-labels { display: flex; gap: 5px; margin-bottom: 16px; }
+.sv-prog-day-lbl { flex: 1; font-size: 9px; font-weight: 600; letter-spacing: .5px; text-transform: uppercase; color: var(--tx3); text-align: center; }
+.sv-stats { display: flex; gap: 10px; margin-bottom: 6px; }
+.sv-stat { flex: 1; background: var(--bg3); border: 1px solid var(--bd); border-radius: 12px; padding: 12px 10px; text-align: center; }
+.hst-v { font-family: var(--font-display); font-size: 28px; letter-spacing: .5px; line-height: 1; }
+.hst-l { font-size: 10px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--tx3); margin-top: 2px; }
+
+/* ── Save button ── */
+.sv-btn {
+  width: calc(100% - 28px);
+  margin: 18px 14px 0;
+  padding: 17px;
+  border-radius: var(--r2);
+  border: none;
+  font-family: var(--font-display);
+  font-size: 20px;
+  letter-spacing: 5px;
+  cursor: pointer;
+  transition: all .2s cubic-bezier(.4,0,.2,1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.push .sv-btn { background: linear-gradient(135deg,#ff5240,#cc3526); color: #fff; box-shadow: 0 6px 28px rgba(255,82,64,.3); }
+.pull .sv-btn { background: linear-gradient(135deg,#00d4a0,#009e77); color: #001a12; box-shadow: 0 6px 28px rgba(0,212,160,.25); }
+.legs .sv-btn { background: linear-gradient(135deg,#9b6dff,#7845e8); color: #fff; box-shadow: 0 6px 28px rgba(155,109,255,.25); }
+.sv-btn:active { transform: scale(.97); filter: brightness(.9); }
+
+/* ── Historia ── */
+.hc {
+  background: var(--card);
+  border: 1px solid var(--bd);
+  border-radius: 16px;
+  padding: 16px;
+  margin: 0 14px 8px;
+  cursor: pointer;
+  box-shadow: 0 2px 12px rgba(0,0,0,.25);
+  transition: all .2s cubic-bezier(.4,0,.2,1);
+}
+.hc:active { transform: scale(.99); border-color: var(--bd2); }
+.hc-name { font-size: 17px; font-weight: 700; color: var(--tx); }
+.hc-date { font-size: 12px; color: var(--tx2); margin-top: 3px; }
+.hst-v { font-family: var(--font-display); font-size: 28px; letter-spacing: .5px; line-height: 1; }
+.hst-l { font-size: 10px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--tx3); }
+
+/* ── Timer ── */
+#tmr {
+  border: 1px solid rgba(242,201,76,.18);
+  background: rgba(12,14,20,.97);
+  border-radius: 18px;
+  box-shadow: 0 8px 40px rgba(0,0,0,.7), inset 0 1px 0 rgba(255,255,255,.06);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+#tmr-val { font-family: var(--font-mono); font-size: 42px; font-weight: 700; letter-spacing: -2px; color: var(--tx); font-variant-numeric: tabular-nums; }
+.tmr-lbl { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--tx3); }
+
+/* ── Nutrición ── */
+.macro-dashboard {
+  margin: 0 14px 12px;
+  background: var(--card);
+  border: 1px solid var(--bd);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 2px 20px rgba(0,0,0,.35);
+}
+.kcal-current { font-family: var(--font-display); font-size: 56px; letter-spacing: -1px; line-height: 1; }
+.kcal-sep, .kcal-goal { font-family: var(--font-mono); font-size: 18px; color: var(--tx3); }
+.prog-bar-track { height: 10px; background: rgba(255,255,255,.05); border-radius: 5px; overflow: hidden; margin-bottom: 18px; }
+.prog-bar-fill { height: 100%; border-radius: 5px; transition: width .6s cubic-bezier(.4,0,.2,1); }
+.macro-bar-track { height: 6px; background: rgba(255,255,255,.05); border-radius: 3px; overflow: hidden; }
+.macro-bar-fill { border-radius: 3px; transition: width .5s cubic-bezier(.4,0,.2,1); }
+.macro-bar-lbl { font-size: 13px; font-weight: 600; color: var(--tx2); width: 70px; flex-shrink: 0; }
+.macro-bar-nums { font-family: var(--font-mono); font-size: 12px; color: var(--tx2); width: 90px; text-align: right; flex-shrink: 0; }
+.meal {
+  background: var(--card);
+  border: 1px solid var(--bd);
+  border-radius: 16px;
+  margin: 0 14px 8px;
+  overflow: visible;
+  box-shadow: 0 2px 12px rgba(0,0,0,.25);
+  transition: border-color .2s;
+}
+.meal.open { border-color: var(--bd2); }
+.meal-hdr { display: flex; align-items: center; gap: 12px; padding: 15px 16px; cursor: pointer; }
+.meal-name { font-size: 15px; font-weight: 700; color: var(--tx); }
+.meal-time { font-size: 12px; color: var(--tx3); margin-top: 1px; }
+.meal-kcal { font-family: var(--font-mono); font-size: 12px; color: var(--tx2); flex-shrink: 0; }
+.meal-body { padding: 0 16px 16px; }
+.meal.open .meal-body { display: block; }
+.meal-add-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1.5px dashed rgba(242,201,76,.22);
+  background: transparent;
+  color: var(--tx3);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 8px;
+  transition: all .2s;
+}
+.meal-add-btn:active { border-color: var(--gold); color: var(--gold); background: var(--gold2); }
+
+/* ── Food search panel ── */
+#food-search-panel {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 800;
+  background: rgba(0,0,0,.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  align-items: flex-end;
+}
+#food-search-panel.open { display: flex; }
+.fsp-sheet {
+  background: linear-gradient(180deg,#181d2e 0%,#0e1118 100%);
+  border-radius: 22px 22px 0 0;
+  width: 100%;
+  max-height: 84vh;
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid rgba(242,201,76,.14);
+  box-shadow: 0 -8px 48px rgba(0,0,0,.7), inset 0 1px 0 rgba(242,201,76,.06);
+  animation: sheet-up .3s cubic-bezier(.22,1,.36,1);
+}
+.fsp-handle { width: 36px; height: 4px; border-radius: 2px; background: rgba(255,255,255,.18); margin: 12px auto 0; flex-shrink: 0; }
+.fsp-header { padding: 12px 18px 12px; flex-shrink: 0; border-bottom: 1px solid rgba(255,255,255,.06); }
+.fsp-meal-name { font-size: 10px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--tx3); margin-bottom: 10px; }
+.fsp-input {
+  width: 100%;
+  background: #1c2236;
+  border: 1.5px solid rgba(255,255,255,.1);
+  border-radius: 14px;
+  padding: 14px 16px;
+  color: var(--tx);
+  font-size: 16px;
+  outline: none;
+  min-height: 52px;
+  -webkit-appearance: none;
+  box-sizing: border-box;
+  transition: border-color .15s;
+}
+.fsp-input:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(242,201,76,.1); }
+.fsp-input::placeholder { color: var(--tx3); }
+.fsp-results { overflow-y: auto; flex: 1; -webkit-overflow-scrolling: touch; overscroll-behavior: contain; }
+.fsp-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  border-bottom: 1px solid rgba(255,255,255,.04);
+  cursor: pointer;
+  min-height: 60px;
+  -webkit-tap-highlight-color: transparent;
+  transition: background .1s;
+}
+.fsp-item:active { background: rgba(255,255,255,.04); }
+.fsp-item-info { flex: 1; min-width: 0; }
+.fsp-item-name { font-size: 15px; font-weight: 600; color: var(--tx); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.fsp-item-mac { font-family: var(--font-mono); font-size: 11px; color: var(--tx3); margin-top: 3px; }
+.fsp-item-badge { display: inline-block; padding: 1px 5px; border-radius: 3px; font-size: 8px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; background: var(--gold2); color: var(--gold); border: 1px solid var(--gold3); margin-left: 6px; vertical-align: middle; }
+.fsp-item-plus { font-size: 26px; font-weight: 200; color: var(--gold); flex-shrink: 0; margin-left: 10px; }
+.fsp-empty { padding: 24px 18px; text-align: center; font-size: 14px; color: var(--tx3); }
+.fsp-create {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  cursor: pointer;
+  border-top: 1px solid rgba(255,255,255,.05);
+  transition: background .1s;
+}
+.fsp-create:active { background: rgba(255,255,255,.04); }
+.fsp-create-icon { width: 32px; height: 32px; border-radius: 8px; background: var(--gold2); border: 1px solid var(--gold3); display: flex; align-items: center; justify-content: center; font-size: 18px; color: var(--gold); flex-shrink: 0; }
+.fsp-create-text { font-size: 14px; font-weight: 600; color: var(--gold); }
+.fsp-create-sub { font-size: 12px; color: var(--tx3); margin-top: 2px; }
+.fsp-qty-phase { padding: 16px 18px; flex-shrink: 0; border-top: 1px solid rgba(255,255,255,.06); }
+.fsp-selected-food { display: flex; align-items: center; justify-content: space-between; padding: 11px 14px; border-radius: 12px; background: rgba(0,212,160,.07); border: 1px solid rgba(0,212,160,.18); margin-bottom: 12px; gap: 8px; }
+.fsp-sel-name { font-size: 14px; font-weight: 700; color: var(--pull); flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.fsp-sel-info { font-family: var(--font-mono); font-size: 11px; color: var(--tx3); flex-shrink: 0; }
+.fsp-sel-clear { width: 26px; height: 26px; border-radius: 50%; border: 1px solid rgba(0,212,160,.25); background: transparent; color: rgba(0,212,160,.6); cursor: pointer; font-size: 13px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.fsp-qty-row { display: flex; gap: 8px; align-items: stretch; }
+.fsp-qty-wrap { position: relative; flex: 1; display: flex; align-items: center; }
+.fsp-qty-input { width: 100%; background: #1c2236; border: 1.5px solid rgba(255,255,255,.12); border-radius: 14px; padding: 14px 60px 14px 16px; color: var(--tx); font-size: 20px; font-weight: 700; font-family: var(--font-mono); outline: none; min-height: 54px; -webkit-appearance: none; transition: border-color .15s; }
+.fsp-qty-input:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(242,201,76,.1); }
+.fsp-qty-unit { position: absolute; right: 14px; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--tx3); pointer-events: none; }
+.fsp-add-btn { padding: 14px 24px; border-radius: 14px; border: none; background: var(--gold); color: #111318; font-family: var(--font-display); font-size: 18px; letter-spacing: 2px; cursor: pointer; min-height: 54px; flex-shrink: 0; transition: all .15s; }
+.fsp-add-btn:active { opacity: .85; transform: scale(.96); }
+
+/* ── Notificación ── */
+#notif {
+  background: rgba(12,14,20,.97);
+  border: 1px solid rgba(242,201,76,.2);
+  border-radius: 14px;
+  padding: 12px 22px;
+  font-size: 14px;
+  font-weight: 600;
+  box-shadow: 0 8px 32px rgba(0,0,0,.6);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+/* ── Progreso ── */
+.pr-card {
+  background: var(--card);
+  border: 1px solid var(--bd);
+  border-radius: 16px;
+  padding: 16px 14px 14px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0,0,0,.25);
+  transition: border-color .2s;
+}
+.pr-card:hover { border-color: var(--bd2); }
+.streak-card {
+  background: var(--card);
+  border: 1px solid var(--bd);
+  border-radius: 16px;
+  padding: 18px 16px;
+  margin: 0 14px 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,.25);
+}
+.chart-card {
+  margin: 0 14px 12px;
+  background: var(--card);
+  border: 1px solid var(--bd);
+  border-radius: 16px;
+  padding: 18px 16px 14px;
+  box-shadow: 0 2px 12px rgba(0,0,0,.25);
+}
+
+/* ── Sección labels ── */
+.sec-lbl { padding: 14px 16px 8px; display: flex; align-items: center; gap: 10px; }
+.sec-lbl span { font-size: 10px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--tx3); flex-shrink: 0; }
+.sec-lbl::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg,var(--bd2),transparent); }
+.meal-sec-lbl { font-size: 10px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--tx3); padding: 16px 16px 8px; }
+
+/* ── Scroll ── */
+::-webkit-scrollbar { width: 2px; height: 2px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,.1); border-radius: 1px; }
+
+/* ── Water ── */
+.water-card { margin: 0 14px 12px; background: var(--card); border: 1px solid var(--bd); border-radius: 16px; padding: 18px; box-shadow: 0 2px 12px rgba(0,0,0,.25); }
+.water-btn.main { background: rgba(0,212,160,.1); border-color: rgba(0,212,160,.25); color: var(--pull); }
+
+/* ── Animaciones ── */
+@keyframes fade-up { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+.ec, .hc, .meal, .pr-card { animation: fade-up .22s ease-out both; }
 </style>
 </head>
 <body>
@@ -1423,62 +2129,70 @@ function clearState(sess){
 
 // ════════════ DATA ════════════
 var SC={
-pusha:{n:'Push A',cls:'push',day:'Lunes',sub:'Pecho fuerza · Hombro · Tríceps',s:27},
-pushb:{n:'Push B',cls:'push',day:'Jueves',sub:'Pecho volumen · Hombro · Tríceps',s:28},
-pulla:{n:'Pull A',cls:'pull',day:'Martes',sub:'Espalda fuerza · Bíceps · Rear delt',s:21},
+pusha:{n:'Push A',cls:'push',day:'Lunes',sub:'Pecho fuerza + volumen · Hombro · Tríceps',s:29},
+pushb:{n:'Push B',cls:'push',day:'Jueves',sub:'Pecho hipertrofia · Hombro · Tríceps',s:29},
+pulla:{n:'Pull A',cls:'pull',day:'Martes',sub:'Espalda fuerza · Bíceps · Rear delt',s:24},
 pullb:{n:'Pull B',cls:'pull',day:'Viernes',sub:'Espalda volumen · Bíceps · Rear delt',s:26},
-legsa:{n:'Legs A',cls:'legs',day:'Miércoles',sub:'Piernas fuerza · Core',s:18},
+legsa:{n:'Legs A',cls:'legs',day:'Miércoles',sub:'Piernas fuerza + volumen · Core',s:20},
 legsb:{n:'Legs B',cls:'legs',day:'Sábado',sub:'Piernas volumen · Core · Abs',s:25}
 };
 var SE={
-pusha:['pa1','pa2','pa3','pa4','pa5','pa6','pa7','pa8'],
+pusha:['pa1','pa1b','pa2','pa3','pa4','pa5','pa6','pa7'],
 pushb:['pb1','pb2','pb3','pb4','pb5','pb6','pb7','pb8'],
-pulla:['pla1','pla2','pla3','pla4','pla5','pla6'],
+pulla:['pla1','pla2','pla3','pla4','pla5','pla6','pla7'],
 pullb:['plb1','plb2','plb3','plb4','plb5','plb6','plb7'],
-legsa:['la1','la2','la3','la4','la5'],
+legsa:['la1','la1b','la2','la3','la4','la5'],
 legsb:['lb1','lb2','lb3','lb4','lb5','lb6','lb7']
 };
 var EX={
-pa1:['Press banca plano','Escápulas retraídas. Barra toca el pecho. 2 seg bajada. Descanso: 3-4 min',[['6','82'],['5','85'],['4','87'],['3','90']]],
-pa2:['Press inclinado mancuernas 30°','Peso por mano. Meta: 3×10 a 28kg antes de subir. Descanso: 2 min',[['10','28'],['10','28'],['10','28']]],
-pa3:['Fondos lastrados','Cabeza adelante. 30° inclinación. Descanso: 2 min',[['8','+17'],['7','+20'],['6','+22']]],
-pa4:['Flexiones pies elevados','Pies en banco 60cm. Pecho superior al fallo. Descanso: 90 seg',[['max','—'],['max','—'],['max','—']],'PECHO SUP'],
-pa5:['Press militar barra','Core apretado. No arquear la espalda. Descanso: 2 min',[['8','40'],['7','42'],['6','45']]],
-pa6:['Elevaciones laterales ×5','15 reps limpias antes de subir. Bajada 4 seg. Descanso: 60 seg',[['20','10'],['18','10'],['15','12'],['15','12'],['12','14']]],
-pa7:['Extensión overhead cable','De espaldas. Extender completamente. Descanso: 60 seg',[['15','30'],['12','35'],['12','40']]],
-pa8:['Soga tríceps + DROP','Codos pegados. Descanso: 60 seg',[['12','45'],['12','50'],['10+drop','50']],'DROPSET','⚡ DROP S3: 10 reps a 50kg → sin descanso → 35kg → fallo'],
-pb1:['Press inclinado Smith 30°','Bajada lenta 3 seg. Descanso: 90 seg',[['12','40'],['10','60'],['8','70'],['6','70']]],
-pb2:['Press banca mancuernas','Bajada 3 seg. Meta: 3×10 a 30kg. Descanso: 90 seg',[['10','30'],['10','30'],['10','30']]],
-pb3:['Aperturas planas','PAUSA 1-2 seg en estiramiento máximo. Bajada 3 seg. Descanso: 60 seg',[['12','24'],['12','26'],['10','26']]],
-pb4:['Pec deck / Contractora','Pausa 2 seg contracción máxima. Empezar en 40kg. Descanso: 60 seg',[['15','40'],['12','45'],['12','50']],'CONTRACCION'],
-pb5:['Elevaciones laterales cable','ARRANCAR en 12kg. Bajada 4 seg. Descanso: 60 seg',[['15','12'],['15','12'],['15','14'],['12','14']]],
-pb6:['Press francés barra Z','2 series calentamiento al 50% antes. Meta: 3×10 a 20kg. Descanso: 60 seg',[['10','20'],['10','20'],['10','20']]],
-pb7:['Extensión overhead cable','Extender completamente. Descanso: 60 seg',[['15','30'],['12','35'],['12','40'],['10','45']]],
-pb8:['Soga tríceps + DROP','Codos pegados. Descanso: 60 seg',[['15','45'],['12','50'],['12','50'],['10+drop','50']],'DROPSET','⚡ DROP S4 OBLIGATORIO: 10 reps → 35kg → fallo'],
-pla1:['Dominadas lastre','Bajar COMPLETAMENTE. Descanso: 3-4 min',[['6','+12'],['6','+12'],['5','+15'],['5','+15']]],
-pla2:['Remo Pendlay','Torso paralelo al piso. Descanso: 3 min',[['8','72'],['7','72'],['6','75'],['6','75']]],
-pla3:['Remo polea baja agarre neutro','Escápulas juntas. Descanso: 90 seg',[['10','50'],['10','55'],['9','57']]],
-pla4:['Pájaros polea rear delt','ARRANCAR en 7kg. Codos levemente flexionados. Descanso: 60 seg',[['15','7'],['15','7'],['13','9'],['13','9']]],
-pla5:['Curl inclinado 45° alternado','Meta: 3×10 a 12kg. BAJADA 4 seg. Descanso: 60 seg',[['10','12'],['10','12'],['10','12']],'PICO'],
-pla6:['Curl araña + DROP','Pausa 1 seg arriba. Bajada 4 seg. Descanso: 60 seg',[['12','10'],['10','12'],['10+drop','12']],'GROSOR','⚡ DROP S3 OBLIGATORIO: 12kg → 8kg → fallo'],
-plb1:['Jalones polea alta agarre abierto','Escápulas abajo. Descanso: 90 seg',[['12','60'],['10','65'],['10','67'],['10','70']]],
-plb2:['Remo Gironda polea baja','Escápulas juntas. Descanso: 90 seg',[['12','60'],['10','65'],['10','67'],['10','70']]],
-plb3:['Jalones agarre cerrado supino','Dorsal inferior. Descanso: 90 seg',[['12','62'],['10','67'],['10','70'],['8','72']]],
+/* ════ PUSH A — Lunes ════ */
+pa1:['Press banca plano barra','FUERZA BASE: escápulas retraídas, barra toca el pecho, 2 seg bajada. Descanso: 3 min',[['6','82'],['5','85'],['4','87'],['3','90']]],
+pa1b:['Press banca plano — FINALIZADOR','VOLUMEN: misma barra, 70kg. 15 reps lentas. Pausa 1 seg abajo. Sin descanso extra.',[['15','70']],'VOLUMEN'],
+pa2:['Press inclinado mancuernas 30°','12 reps con bajada 3 seg y PAUSA 1 seg en estiramiento. Más TUT. Descanso: 90 seg',[['12','26'],['12','28'],['12','28']]],
+pa3:['Fondos lastrados','Cabeza adelante 30°. 3 seg bajada. Descanso: 2 min',[['10','+22'],['8','+22'],['8','+22']]],
+pa4:['Press Arnold mancuernas','Giro lento en la subida. Pausa 1 seg arriba. 12 reps. Descanso: 90 seg',[['12','12'],['12','12'],['12','14']],'NUEVO'],
+pa5:['Elevaciones laterales ×5','15 reps todas las series. Bajada 4 seg. Descanso: 60 seg',[['15','10'],['15','10'],['15','12'],['15','12'],['15','12']]],
+pa6:['Extensión overhead cable','TUT: 3 seg bajada. Extender completamente. Descanso: 60 seg',[['15','35'],['12','40'],['12','45']]],
+pa7:['Soga tríceps + DROP','Codos pegados al cuerpo. Descanso: 60 seg',[['15','45'],['12','50'],['10+drop','50']],'DROPSET','⚡ DROP S3: 50kg → 35kg → fallo'],
+/* ════ PUSH B — Jueves ════ */
+pb1:['Press inclinado Smith 30°','Bajada 3 seg. 12 reps en S1. Mantener 65kg hasta cerrar 8r. Descanso: 90 seg',[['12','40'],['12','60'],['8','65'],['8','65']]],
+pb2:['Press banca mancuernas','Bajada 3 seg + PAUSA 1 seg en estiramiento. 12 reps. Descanso: 90 seg',[['12','26'],['12','28'],['12','30']]],
+pb3:['Aperturas planas PAUSA','PAUSA 2 seg en estiramiento máximo. Bajada 4 seg. 15 reps. Descanso: 60 seg',[['15','20'],['15','22'],['15','22']]],
+pb4:['Pec deck — CONTRACCIÓN','PAUSA 2 seg contracción máxima. 15 reps. TOPE 50kg. Descanso: 60 seg',[['15','40'],['15','45'],['15','50']],'CONTRACCION'],
+pb5:['Elevaciones laterales cable','15 reps. Arrancar en 10kg. Bajada 4 seg. Descanso: 60 seg',[['15','10'],['15','10'],['15','12'],['15','12']]],
+pb6:['Press francés barra Z','22kg. 2 series calentamiento al 50%. Descanso: 60 seg',[['10','22'],['10','22'],['10','22']],'SUBE'],
+pb7:['Extensión overhead cable','3 seg bajada. Descanso: 60 seg',[['15','35'],['15','40'],['12','45'],['12','50']]],
+pb8:['Soga tríceps + DROP','Codos pegados. Descanso: 60 seg',[['15','45'],['12','50'],['12','50'],['10+drop','50']],'DROPSET','⚡ DROP S4 OBLIGATORIO: 50kg → 35kg → fallo'],
+/* ════ PULL A — Martes ════ */
+pla1:['Dominadas lastre','Bajar COMPLETAMENTE. Sin impulso. Descanso: 3-4 min',[['6','+12'],['6','+12'],['5','+15'],['5','+15']]],
+pla2:['Remo Pendlay','Torso paralelo al piso. Explosivo arriba, 3 seg bajada. Descanso: 3 min',[['8','70'],['8','72'],['8','72'],['7','75']]],
+pla3:['Remo polea baja agarre neutro','Escápulas juntas al final. Descanso: 90 seg',[['12','55'],['12','57'],['10','59']]],
+pla4:['Pájaros polea rear delt','S3-S4 en 9kg. Codos levemente flexionados. Descanso: 60 seg',[['15','7'],['15','7'],['13','9'],['13','9']]],
+pla5:['Curl inclinado 45° alternado','12 reps. BAJADA 4 seg. CONTRACCIÓN MÁXIMA arriba. Descanso: 60 seg',[['12','10'],['12','12'],['12','12']],'PICO'],
+pla6:['Curl araña + DROP','15 reps en S1-S2. Pausa 1 seg arriba. Bajada 4 seg. Descanso: 60 seg',[['15','10'],['15','10'],['12+drop','12']],'GROSOR','⚡ DROP S3: 12kg → 8kg → fallo'],
+pla7:['Crunch cable + Elevación piernas','Abs. Descanso: 60 seg',[['15','—'],['12','—'],['12','—']]],
+/* ════ PULL B — Viernes ════ */
+plb1:['Jalones polea alta agarre abierto','Escápulas abajo. 3 seg bajada. Descanso: 90 seg',[['12','60'],['12','65'],['10','67'],['10','70']]],
+plb2:['Remo Gironda polea baja','Escápulas juntas. Pecho alto. Descanso: 90 seg',[['12','60'],['12','65'],['10','67'],['10','70']]],
+plb3:['Jalones agarre cerrado supino','Dorsal inferior. 3 seg bajada. Descanso: 90 seg',[['12','62'],['10','67'],['10','70'],['8','72']]],
 plb4:['Facepulls — TOPE 30kg','Codos arriba. NO subir de 30kg. Descanso: 60 seg',[['15','25'],['15','27'],['15','30'],['12','30']],'BLOQ'],
-plb5:['Curl martillo alternado','BAJADA 4 seg. Braquial. Descanso: 60 seg',[['12','20'],['12','22'],['10','24']]],
-plb6:['Curl barra polea baja','BLOQUEADO. No subir hasta cerrar reps. Descanso: 60 seg',[['12','37'],['10','42'],['10','45'],['8','50']],'BLOQ'],
+plb5:['Curl martillo cable alternado','BAJADA 4 seg. Braquial. 12 reps. Descanso: 60 seg',[['12','27'],['12','32'],['10','37']]],
+plb6:['Curl barra polea baja bloqueado','BLOQUEADO. 15 reps S1. Pausa 1 seg arriba. Descanso: 60 seg',[['15','35'],['12','40'],['12','45'],['10','50']],'BLOQ'],
 plb7:['Crunch cable + Elevación piernas','Abs Pull B. Descanso: 60 seg',[['15','—'],['12','—'],['12','—']]],
-la1:['Sentadilla libre','Profundidad paralela mínima. Valsalva. Descanso: 3-4 min',[['6','107'],['5','115'],['4','120'],['3','125']]],
-la2:['Peso muerto rumano','Sentir el estiramiento del isquio. Descanso: 2 min',[['8','95'],['6','110'],['6','115'],['5','120']]],
-la3:['Hip thrust barra','Pausa 1 seg arriba. Descanso: 2 min',[['8','152'],['8','157'],['6','162'],['6','165']]],
-la4:['Sentadilla búlgara','Rodilla no pasa la punta del pie. Descanso: 90 seg',[['8','20'],['8','22'],['6','26']]],
-la5:['Camilla isquios + DROP','Bajada 3 seg. Descanso: 90 seg',[['10','50'],['10','52'],['8+drop','52']],'DROPSET','⚡ DROP S3: 52kg → 38kg → fallo'],
+/* ════ LEGS A — Miércoles ════ */
+la1:['Sentadilla libre — FUERZA','Profundidad paralela mínima. Valsalva. Descanso: 3-4 min',[['6','107'],['5','115'],['4','120'],['3','125']]],
+la1b:['Sentadilla — FINALIZADOR VOLUMEN','Misma barra, 80kg. 15 reps lentas. Descanso: 2 min',[['15','80']],'VOLUMEN'],
+la2:['Peso muerto rumano','Sentir estiramiento isquio. Mantener hasta cerrar reps. Descanso: 2 min',[['8','95'],['6','110'],['5','115'],['5','115']]],
+la3:['Hip thrust barra','Pausa 1 seg arriba. Progresos reales. Descanso: 2 min',[['8','155'],['8','160'],['6','165'],['6','165']]],
+la4:['Sentadilla búlgara','SUBE A 24kg. Rodilla no pasa punta del pie. Descanso: 90 seg',[['8','22'],['8','24'],['8','24']],'SUBE'],
+la5:['Camilla isquios + DROP','OBLIGATORIA. Bajada 3 seg. Descanso: 90 seg',[['10','50'],['10','52'],['8+drop','52']],'DROPSET','⚡ DROP S3: 52kg → 38kg → fallo'],
+/* ════ LEGS B — Sábado ════ */
 lb1:['Prensa 45°','Pies altos. 90° mínimo. Descanso: 2-3 min',[['15','130'],['12','150'],['12','155'],['10','165']]],
-lb2:['Hip thrust volumen','Pausa 2 seg arriba. Descanso: 2 min',[['12','135'],['12','145'],['10','148'],['10','152']]],
-lb3:['Extensión cuádriceps','Pausa 1 seg arriba. Bajada 3 seg. Descanso: 60 seg',[['15','57'],['15','62'],['12','67']]],
+lb2:['Hip thrust volumen','Pausa 2 seg arriba. 12 reps. Descanso: 2 min',[['12','135'],['12','145'],['12','148'],['10','152']]],
+lb3:['Extensión cuádriceps','Pausa 2 seg arriba. Bajada 3 seg. 15 reps. Descanso: 60 seg',[['15','57'],['15','62'],['15','67']]],
 lb4:['Camilla isquios sentado','Bajada 4 seg. Descanso: 60 seg',[['15','37'],['12','42'],['12','47']]],
-lb5:['Gemelos de pie + DROP','Máx estiramiento. Pausa 1 seg arriba. Descanso: 60 seg',[['20','65'],['15','72'],['15','77'],['12+drop','82']],'DROPSET','⚡ DROP S4: 82kg → 60kg → fallo'],
-lb6:['Rueda abdominal','Core contraído. Descanso: 60 seg',[['15','—'],['15','—'],['12','—'],['12','—']]],
+lb5:['Gemelos de pie + DROP','Máx estiramiento. Pausa 2 seg arriba. Descanso: 60 seg',[['20','65'],['15','72'],['15','77'],['12+drop','82']],'DROPSET','⚡ DROP S4: 82kg → 60kg → fallo'],
+lb6:['Rueda abdominal','Core contraído todo el recorrido. Descanso: 60 seg',[['15','—'],['15','—'],['12','—'],['12','—']]],
 lb7:['Plancha elevación pierna','10 reps por lado. Descanso: 60 seg',[['10c/l','—'],['10c/l','—'],['10c/l','—']]]
 };
 var ABS={pulla:'Crunch cable: 3×15/12/12 · Elevación piernas colgado: 3×12/10/10',pushb:'Oblicuos en polea: 3×15 c/lado · Plancha lateral: 3×30 seg c/lado',legsb:'Rueda abdominal: 4×15/15/12/12 · Plancha elevación pierna: 3×10 c/lado'};
@@ -1867,7 +2581,7 @@ window.fin=async function(sess){
 
 // ════════════ NUTRITION ════════════
 
-var nutGoals={k:2000,pr:160,c:200,f:60};
+var nutGoals={k:2600,pr:160,c:280,f:70};
 var waterMl=0,waterGoal=3000;
 
 function loadNutGoals(){
