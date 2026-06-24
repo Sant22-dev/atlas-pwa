@@ -2338,16 +2338,14 @@ var nTO=null;
 function lH(){try{return JSON.parse(localStorage.getItem('atlas_h')||'[]');}catch(e){return[];}}
 function sH(h){try{localStorage.setItem('atlas_h',JSON.stringify(h.slice(0,200)));}catch(e){}}
 function lN(){
-  var today=new Date().toISOString().split('T')[0];
+  var dateKey=nDayDate||new Date().toISOString().split('T')[0];
   try{
     var raw=localStorage.getItem('atlas_n');
     if(!raw){nDay={};return;}
     var d=JSON.parse(raw);
-    // Formato nuevo: {YYYY-MM-DD: {mid: [items]}}
-    if(d[today]&&typeof d[today]==='object'){
-      nDay=d[today];
-    // Formato viejo: {date: ..., meals: {}}
-    } else if(d.date===today&&d.meals){
+    if(d[dateKey]&&typeof d[dateKey]==='object'){
+      nDay=d[dateKey];
+    } else if(d.date===dateKey&&d.meals){
       nDay=d.meals;
     } else {
       nDay={};
@@ -2355,12 +2353,12 @@ function lN(){
   }catch(e){nDay={};}
 }
 function saveN(){
-  var today=new Date().toISOString().split('T')[0];
+  var dateKey=nDayDate||new Date().toISOString().split('T')[0];
   try{
     var d={};try{d=JSON.parse(localStorage.getItem('atlas_n')||'{}');}catch(e){}
     if(typeof d.date==='string')d={};
-    d[today]=nDay;
-    var keys=Object.keys(d).filter(function(k){return k.match(/^\d{4}/)}).sort().reverse().slice(0,30);
+    d[dateKey]=nDay;
+    var keys=Object.keys(d).filter(function(k){return k.match(/^\d{4}/);}).sort().reverse().slice(0,30);
     var t={};keys.forEach(function(k){t[k]=d[k];});
     localStorage.setItem('atlas_n',JSON.stringify(t));
   }catch(e){}
@@ -2696,15 +2694,27 @@ window.quickAdd=function(type,amount){
 
 function rNutri(){
   var today=new Date().toISOString().split('T')[0];
-  if(nDayDate&&nDayDate!==today){saveN();nDay={};}
-  nDayDate=today;loadNutGoals();lN();
+  // iOS fix: si nDayDate está vacío (app recargada), lo inicializamos SIN borrar nDay
+  if(!nDayDate){nDayDate=today;}
+  // Solo limpiar nDay si cambiamos de fecha manualmente (no en recarga)
+  // nDay se persiste en localStorage, así que lN() lo restaurará
+  loadNutGoals();lN();
   var view=document.getElementById('vw-nutri');
   var t=getMacros();
-  var dateStr=new Date().toLocaleDateString('es-AR',{weekday:'long',day:'numeric',month:'long'});
+  var dateObj=new Date(nDayDate+'T12:00:00');
+  var dateStr=dateObj.toLocaleDateString('es-AR',{weekday:'long',day:'numeric',month:'long'});
+  var isToday=(nDayDate===today);
   var h=[];
 
-  // ── Header ──
-  h.push('<div class="nut-hdr"><div class="nut-title">NUTRICI\u00d3N</div><div class="nut-date">'+dateStr+'</div></div>');
+  // ── Header con navegación de fechas ──
+  h.push('<div class="nut-hdr">');
+  h.push('<div class="nut-title">NUTRICI\u00d3N</div>');
+  h.push('<div style="display:flex;align-items:center;gap:10px;margin-top:4px">');
+  h.push('<button onclick="nutChangeDay(-1)" style="background:var(--bg3);border:1px solid var(--bd);border-radius:8px;color:var(--tx2);font-size:16px;width:30px;height:30px;cursor:pointer;display:flex;align-items:center;justify-content:center">\u2039</button>');
+  h.push('<span class="nut-date" style="min-width:160px;text-align:center">'+dateStr+(isToday?' \u00b7 hoy':'')+'</span>');
+  h.push('<button onclick="nutChangeDay(1)"'+(isToday?' disabled style="opacity:.3;cursor:default"':'')+' style="background:var(--bg3);border:1px solid var(--bd);border-radius:8px;color:var(--tx2);font-size:16px;width:30px;height:30px;cursor:pointer;display:flex;align-items:center;justify-content:center">\u203a</button>');
+  h.push('</div>');
+  h.push('</div>');
 
   // ── Calculadora ──
   h.push('<div class="macro-calc">');
@@ -3101,28 +3111,45 @@ function fDel(mid,rid){
 }
 
 function lN(){
-  var today=new Date().toISOString().split('T')[0];
+  var dateKey=nDayDate||new Date().toISOString().split('T')[0];
   try{
     var raw=localStorage.getItem('atlas_n');
     if(!raw){nDay={};return;}
     var d=JSON.parse(raw);
-    if(d[today]&&typeof d[today]==='object'){nDay=d[today];}
-    else if(d.date===today&&d.meals){nDay=d.meals;}
+    if(d[dateKey]&&typeof d[dateKey]==='object'){nDay=d[dateKey];}
+    else if(d.date===dateKey&&d.meals){nDay=d.meals;}
     else{nDay={};}
   }catch(e){nDay={};}
 }
 
 function saveN(){
-  var today=new Date().toISOString().split('T')[0];
+  var dateKey=nDayDate||new Date().toISOString().split('T')[0];
   try{
     var d={};try{d=JSON.parse(localStorage.getItem('atlas_n')||'{}');}catch(e){}
     if(typeof d.date==='string')d={};
-    d[today]=nDay;
+    d[dateKey]=nDay;
     var keys=Object.keys(d).filter(function(k){return k.match(/^\d{4}/);}).sort().reverse().slice(0,30);
     var t={};keys.forEach(function(k){t[k]=d[k];});
     localStorage.setItem('atlas_n',JSON.stringify(t));
   }catch(e){}
 }
+
+function sNutri(){
+  saveN();
+  sNotif('Día guardado ✓');
+}
+
+window.nutChangeDay=function(delta){
+  saveN();
+  var today=new Date().toISOString().split('T')[0];
+  var d=new Date(nDayDate+'T12:00:00');
+  d.setDate(d.getDate()+delta);
+  var next=d.toISOString().split('T')[0];
+  if(next>today)return;
+  nDayDate=next;
+  nDay={};
+  rNutri();
+};
 
 // ════════════ PROGRESS VIEW ════════════
 function rProg(){
