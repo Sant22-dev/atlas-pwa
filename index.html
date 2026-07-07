@@ -4660,6 +4660,14 @@ function big4Data(){
   }).filter(function(L){return L.pts.length>0;});
 }
 
+
+// ════════════ SAVE NUTRITION DAY ════════════
+window.sNutri=function(){
+  saveN();
+  var m=getMacros();
+  sNotif('\u2713 D\u00eda guardado \u2014 '+Math.round(m.k)+' kcal \u00b7 '+Math.round(m.pr)+'g prot');
+};
+
 // ════════════ INIT ════════════
 document.addEventListener('DOMContentLoaded', function(){
   // ── Event delegation: un listener para TODOS los clicks de nutrición ──
