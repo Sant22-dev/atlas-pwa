@@ -2044,6 +2044,13 @@ html, body {
 .b4-v{font-family:var(--font-display);font-size:28px;line-height:1.1;margin-top:2px}
 .b4-v span{font-size:12px;color:var(--tx3);margin-left:2px}
 .b4-d{font-family:var(--font-mono);font-size:10px;color:var(--tx3);margin:2px 0 6px}
+
+/* Banner deload */
+#deload-banner{display:none;margin:10px 14px 4px;padding:12px 14px;border-radius:14px;
+  background:linear-gradient(135deg,rgba(255,180,84,.12),rgba(255,180,84,.04));
+  border:1px solid rgba(255,180,84,.3);}
+#deload-banner .db-t{font-family:var(--font-display);font-size:16px;letter-spacing:2px;color:var(--gold);margin-bottom:3px}
+#deload-banner .db-x{font-size:12px;color:var(--tx2);line-height:1.5}
 </style>
 </head>
 <body>
@@ -2068,6 +2075,10 @@ html, body {
     <button class="ntab spec" onclick="gT('prog')">Progreso</button>
     <button class="ntab spec" onclick="gT('med')">Medidas</button>
     <button class="ntab spec" onclick="gT('hist')">Historial</button>
+  </div>
+  <div id="deload-banner">
+    <div class="db-t">🔄 SEMANA DELOAD — hasta el domingo 13/07</div>
+    <div class="db-x">Cargá el <b>60% de los pesos</b> que muestra cada ejercicio · solo <b>2 series</b> por ejercicio · sin drops ni finishers · 3-4 reps en reserva. El Plan Octubre completo arranca el <b>lunes 14/07</b> — ese día este aviso desaparece solo.</div>
   </div>
   <div id="views">
     <div class="vw" id="vw-nutri"></div>
@@ -4493,8 +4504,9 @@ window.fspConfirm = function() {
   updMealKcal(_fspMid);
   updDashboard();
 
+  var nm=item.n;
   closeFoodPanel();
-  sNotif('\u2713 '+qLabel+' de '+_fspSel.n+' \u2014 '+item.k+' kcal');
+  sNotif('\u2713 '+qLabel+' de '+nm+' \u2014 '+item.k+' kcal');
 };
 
 
@@ -4667,6 +4679,13 @@ window.sNutri=function(){
   var m=getMacros();
   sNotif('\u2713 D\u00eda guardado \u2014 '+Math.round(m.k)+' kcal \u00b7 '+Math.round(m.pr)+'g prot');
 };
+
+
+// Banner deload automático (visible hasta 13/07/2026)
+(function(){
+  var b=document.getElementById('deload-banner');
+  if(b && new Date() <= new Date('2026-07-12T23:59:59')) b.style.display='block';
+})();
 
 // ════════════ INIT ════════════
 document.addEventListener('DOMContentLoaded', function(){
