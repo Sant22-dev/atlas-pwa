@@ -1,5 +1,5 @@
 // Cambiar este número FUERZA que el celular descarte el caché viejo
-const CACHE = 'atlas-v21';
+const CACHE = 'atlas-v28';
 
 self.addEventListener('install', e => {
   self.skipWaiting();
